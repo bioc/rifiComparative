@@ -27,6 +27,7 @@ respectively. Correlation between both measurement is provided (cor).
 <p align="center">
   <img src="log2FC_syntehsisRate_vs_decayRate.png" alt="drawing" width="500"/>
 </p>
+<br/>
 <sub>
 <b>Figure 2:</b> a heatscatter visualization of log2FC(half-life rate (cdt1/cdt2) vs 
 log2FC(synthesis rate (cdt1/cdt2)). Yellow to yellow pale colors show high and 
