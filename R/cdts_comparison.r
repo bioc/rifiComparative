@@ -192,3 +192,5 @@ cdts_comparison <- function(specie,
         mgsub(colnames(df_cdt), c("cdt1", "cdt2"), conditions)
     return(df_cdt)
 }
+write_xlsx(df_cdt, "summary_cdts.xlsx")
+save(df_cdt, file = "summary_cdts.rdata")
