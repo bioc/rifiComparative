@@ -44,9 +44,9 @@ genome plot, scatter, histograms and density plot.
 ## II. Outputs
 
 ### 1. The output Data Frame
-**df_cdt** is the output data frame processed by *cdts_comparison* and 
+**df_cdt** is the output data frame processed by **cdts_comparison** and 
 **functions_cdts_comparison** functions. 
-The **cdts_comparison** requires combined dataframe output from rifi_stats from both treatments. A new column is added to assign treatment type by *assembling_cdts* function. Both dataframes are merged by row. gff file is required to adapt the annotation. gff file is modified by *gff_preprocessing* function and saved in annot_g_c object.
+The **cdts_comparison** requires combined dataframe output from rifi_stats from both treatments. A new column is added to assign treatment type by **assembling_cdts** function. Both dataframes are merged by row. gff file is required to adapt the annotation. gff file is modified by **gff_preprocessing** function and saved as annot_g_c list object.
 
 The data frame mainly contains:
 <br/>
