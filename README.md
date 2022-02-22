@@ -25,7 +25,7 @@ respectively. Correlation between both measurement is provided (cor).
 
 <br/>
 <p align="center">
-  <img src="log2FC_syntehsisRate_vs_decayRate.png" alt="drawing" width="500"/>
+  <img src="log2FC_synthesisRate_vs_decayRate.png" alt="drawing" width="500"/>
 </p>
 <br/>
 <sub>
@@ -60,6 +60,7 @@ requirements are satisfied by your system.
   
   [grid](https://www.rdocumentation.org/packages/graphics/versions/3.6.2/topics/grid) (>= 3.6.2) 
 
+  [rtracklayer](https://www.rdocumentation.org/packages/rtracklayer/versions/1.32.1) (>= 1.32.1) 
 
 # Troubleshooting
 

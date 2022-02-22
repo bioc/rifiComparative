@@ -19,6 +19,7 @@
 # conditions= c("condition 1 name", "condition 2 name")
 # )
 
+source("functions_cdts_comparison.r")
 cdts_comparison <- function(specie,
                             dt1,
                             annot,

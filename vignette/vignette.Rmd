@@ -1,0 +1,174 @@
+---
+title: "Rifi comparative data"
+
+author: "Loubna Youssar"
+
+date: "`r Sys.Date()`"
+output:
+  BiocStyle::html_document:
+    toc: true
+    toc_float: true
+    number_sections: false
+vignette: >
+  %\VignetteIndexEntry{Rifi}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+  
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = TRUE,
+                      message = TRUE,
+                      warning = TRUE)
+```
+
+## 0. Installation
+
+Required dependencies are cited on README, please sure they are properly
+installed (README).
+All functions should be located on the same folder and add them to your path directory.
+
+## I. Introduction
+
+Rifi comparative data is a successor framework of Rifi
+*(https://github.com/CyanolabFreiburg/rifi)*. Generated outputs from the same
+organism with different treatments could be gene based compared. 
+Output comparison calculates for each gene log2FC(half-life), log2FC(intensity)
+and log2FC(half-life/intensity). These values are a pre-analysis for
+transcription regulation and post-transcription regulation. Events for each
+treatment are depicted with the position on the genome.
+P-value from statistical tests as indicated. The comparison provides dataframe,
+genome plot, scatter, histograms and density plot.
+
+
+## II. Outputs
+
+### 1. The output Data Frame
+**df_cdt** is the output data frame processed by *cdts_comparison* and 
+**functions_cdts_comparison** functions. 
+The **cdts_comparison** requires combined dataframe output from rifi_stats from both treatments. A new column is added to assign treatment type by *assembling_cdts* function. Both dataframes are merged by row. gff file is required to adapt the annotation. gff file is modified by *gff_preprocessing* function and saved in annot_g_c object.
+
+The data frame mainly contains:
+<br/>
+**cdt1** = condition 1
+<br/>
+**cdt2** = condition 2
+<br/>
+P.S: all annotations are gene based.
+<br/>
+
+**locus_tag** annotation object
+
+**gene**  annotation object
+
+**feature** region on the genome, from annotation object
+
+**strand** annotation object
+
+**delay_frg_cdt1** delay fragment
+
+**delay_frg_cdt2** delay fragment
+
+**HL_frg_cdt1** half-life fragments
+
+**HL_frg_cdt2** half-life fragments
+
+**HL_cdt1** mean of half-lives segment based (HL of segments covering the gene)
+
+**HL_cdt2** mean of half-lives segment based (HL of segments covering the gene)
+
+**HL_mean_cdt1** mean of means of half-lives probe based (HL of probes covering the gene)
+
+**HL_mean_cdt2** mean of means of half-lives probe based (HL of probes covering the gene)
+
+**log2FC_HL** half-life log2FC on non-treated/treated 
+
+**int_frg_cdt1** intensity fragments
+
+**int_frg_cdt2** intensity fragments
+
+**int_cdt1** means of intensity
+
+**int_cdt2** means of intensity
+
+**int_mean_cdt1** mean of means of intensity
+
+**int_mean_cdt1** mean of means of intensity
+
+**log2FC_int** intensity log2FC on non-treated/treated
+
+**log2FC_HL_int** log2FC half_life/intensity
+
+**paus_cdt1** pausing sites positions 
+
+**paus_cdt2** pausing sites positions 
+
+**iTSS_I_cdt1** positions of internal starting sites predicted by delay fragments
+
+**iTSS_I_cdt2** positions of internal starting sites predicted by delay fragments
+
+**start** gene start on the genome
+
+**end** gene end on the genome
+
+**iTSS_II_cdt1** positions of internal starting sites predicted by HL and intensity fragments
+
+**iTSS_II_cdt2** positions of internal starting sites predicted by HL and intensity fragments
+
+**ter_cdt1** positions of terminales predicted by HL and intensity fragments
+
+**ter_cdt2** positions of terminales predicted by HL and intensity fragments
+
+**P.Value_HL** statistical test p_value of fold change HL fragments 
+
+**adj.P.Val_HL** p_value adjusted of fold change HL fragments
+
+**P.Value_int** statistical test p_value of fold change intensity fragments 
+
+**adj.P.Val_int** p_value adjusted of fold change intensity fragments 
+
+<br/><br/>
+``` {r echo = TRUE}
+load("head_df_cdt.rda")
+Table_1 <- df[,-c(ncol(df) - 1, ncol(df) - 2, ncol(df) - 3)]
+df
+```
+<br/><br/>
+<p align="center">
+**Figure 1**: dataframe.
+</p>
+
+
+<br/><br/>
+``` {r log2FC, echo = FALSE, fig.cap = "**log2FC(HL/Intensity)**", out.width = '100%'}
+knitr::include_graphics("Log2FC_HL_vs_int.png")
+```
+<br/>
+<p align="center">
+**Figure 2**: log2FC
+</p>
+
+<br/><br/>
+``` {r density, echo = FALSE, fig.cap = "**HL density**", out.width = '100%'}
+knitr::include_graphics("density_HL.pdf")
+```
+<br/>
+<p align="center">
+**Figure 3**: density
+</p>
+
+
+<br/><br/>
+``` {r visualization, echo = FALSE, fig.cap = "**genome fragments superposed visualization**", out.width = '100%'}
+knitr::include_graphics("visualization_cdts.png")
+```
+<br/>
+<p align="center">
+**Figure 4**: density
+</p>
+
+
+<br/><br/>
+``` {r}
+sessionInfo()
+```
