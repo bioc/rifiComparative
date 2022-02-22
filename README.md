@@ -25,7 +25,7 @@ respectively. Correlation between both measurement is provided (cor).
 
 <br/>
 <p align="center">
-  <img src="log2FC_synthesisRate_vs_decayRate.png" alt="drawing" width="500"/>
+  <img src="log2FC_synthesisRate_vs_decayRate.png" alt="drawing" width="300"/>
 </p>
 <br/>
 <sub>
