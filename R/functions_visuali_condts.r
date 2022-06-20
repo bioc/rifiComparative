@@ -144,21 +144,6 @@ label_log2_function <-
 label_square_function <- function(x)
   round(sqrt(x), 0)
 
-#coverage_function is used in case of coverage is available
-coverage_function <- function(coverage, chr_fwd, chr_rev) {
-  if (coverage == 1) {
-    chr_fwd <- cbind.data.frame(seq_along(chr_fwd), chr_fwd, strand = "+")
-    colnames(chr_fwd) <- c("position", "coverage", "strand")
-    chr_rev <-
-      cbind.data.frame(seq_along(chr_rev), chr_rev, strand = "-")
-    colnames(chr_rev) <- c("position", "coverage", "strand")
-    chr_cov <- rbind(chr_fwd, chr_rev)
-  } else{
-    chr_cov <- NA
-  }
-  return(chr_cov)
-}
-
 #secondaryAxis designs the secondray axis
 secondaryAxis <-  function(data, parameter, ind) {
   data <- data %>%
@@ -176,12 +161,12 @@ arrange_byGroup <- function(input, parameter) {
     input <- as.data.frame(input %>%
                           group_by(input[, parameter]) %>%
                           arrange(get('position')) %>%
-                          slice(n()))
+                            dplyr::slice(n()))
   }else{
     input <- as.data.frame(input %>%
                             group_by(input[, parameter]) %>%
                             arrange(get('position')) %>%
-                            slice(n()))
+                             dplyr::slice(n()))
     input[which(input$pausing_site == "+"), "position"] <-
       input[which(input$pausing_site == "+"), "position"] + 40
     input[which(input$iTSS_I == "+"), "position"] <-
@@ -517,3 +502,12 @@ TI_frag_threshold <- function(data, TI_threshold) {
   }
   return(TIs)
 }
+
+meanPosition <- function(input, parameter) {
+  input <- as.data.frame(input %>%
+                           group_by(input[, parameter]) %>%
+                           mutate(meanPosi = mean(get('position'))))
+  input <- input[!duplicated(input[, parameter]), ]
+  return(input)
+}
+

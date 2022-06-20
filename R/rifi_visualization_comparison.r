@@ -34,36 +34,13 @@
 #' my_arrow: creates an arrow for the annotation.
 #' arrange_byGroup: selects the last row for each segment and add 40 nucleotides
 #'  in case of negative strand for a nice plot.
-#' regr: plots the predicted delay from linear regression if the data is on
-#' negative strand
-#' delay_mean: adds a column in case of velocity is NA or equal to 60.
-#' The mean of the delay is calculated outliers.
-#' my_segment_T: plots terminals and pausing sites labels.
-#' my_segment_NS: plots internal starting sites 'iTSS'.
-#' limit_function: for values above 10 or 20 in delay and hl. Limit of the axis
-#' is set differently. y-axis limit is applied only if we have
-#' more than 3 values above 10 and lower or equal to 20. An exception is added
-#' in case a dataframe has less than 3 rows and 1
-#' or more values are above 10, the rest of the values above 20 are adjusted to
-#' 20 on "secondaryAxis" function.
-#' empty_boxes: used only in case the dataframe from the positive strand is not
-#' empty, the TU are annotated.
-#' function_TU_arrow: used to avoid plotting arrows when a TU is split into two
-#' pages.
-#' terminal_plot_lm: draws a linear regression line when terminal outliers have
-#' an intensity above a certain
-#' threshold and are consecutive. Usually are smallRNA (ncRNA, asRNA).
-#' slope_function: replaces slope lower than 0.0009 to 0.
-#' velo_function: replaces infinite velocity with NA.
-#' plot the coverage of RNA_seq in exponential phase growth
+
+
 #'
 #' @param data dataframe: the probe based dataframe.
 #' @param genomeLength integer: genome length output of gff3_preprocess
 #' function.
 #' @param annot dataframe: the annotation file.
-#' @param coverage integer: in case the coverage is available.
-#' @param chr_fwd string object: coverage of the forward strand.
-#' @param chr_rev string object: coverage of the reverse strand.
 #' @param region dataframe: gff3 features of the genome.
 #' @param color_region string vector: vector of colors.
 #' @param color_TU string: TU colors
@@ -88,41 +65,7 @@
 #' @param axis_title_y_size integer: title size for y-axis.
 #' @param Alpha integer: color transparency degree.
 #' @param size_gene integer: font size for gene annotation.
-#' @param col_coverage integer: color for coverage plot.
-#' @param TI_threshold integer: threshold for TI between two fragments in case
-#' the TI termination factor drops from the first segment to the second,
-#' default 1.1.
-#' @param p_value_TI integer: p_value of TI fragments selected to be plotted,
-#' default 0.05.
-#' @param p_value_manova integer: p_value of manova test fragments to plot,
-#' default 0.05.
-#' @param p_value_int integer: p_value of intensity fragments fold-change to
-#' plot, default 0.05.
-#' @param p_value_hl integer: p_value of half_life fragments fold-change to
-#' plot, default 0.05.
-#' @param p_value_event integer: p_value of t-test from pausing site and
-#' iTSS_I events to plot, default 0.05.
-#' @param HL_threshold_1 integer: threshold for log2FC(HL) selected to plot,
-#' default log2(1.5). log2FC(HL) >= log2(1.5) are indicated by black color.
-#' If p_value <= p_value_hl (default 0.05), log2FC(HL) is indicated by HL*
-#' otherwise HL.
-#' @param HL_threshold_2 integer: threshold for log2FC(HL) selected to plot,
-#' default -log2(1.5). log2FC(HL) <= -log2(1.5) are indicated by green color.
-#' If p_value <= p_value_hl (default 0.05), log2FC(HL) is indicated by HL*
-#' otherwise HL.
-#' In case of p_value is significant and the log2FC(HL) is between -log2FC(1.5)
-#' and log2FC(1.5), FC is assigned by green color and HL*.
-#' @param HL_threshold_color_1 string: color for HL fold change plot.
-#' @param termination_threshold integer: threshold for termination to plot,
-#' default .8.
-#' @param iTSS_threshold integer: threshold for iTSS_II selected to plot,
-#' default 1.2.
-#' @param event_duration_ps integer: threshold for pausing sites selected to
-#' plot, default -2.
-#' @param event_duration_itss integer: threshold for iTSS_I selected to
-#' plot, default 2.
-#' @param ps_color string: color for pausing site plot.
-#' @param iTSS_I_color string: color for iTSS_I plot.
+
 #'
 #' @return The visualization.
 #'
@@ -130,38 +73,39 @@
 #' data(stats_minimal)
 #' data(annot_g_minimal)
 #' rifi_visualization(data = stats_minimal, genomeLength = annot_g_minimal[[2]],
-#' annot = annot_g_minimal[[1]], coverage = 0, chr_fwd = NA, chr_rev = NA,
-#' region = c("CDS","asRNA","5'UTR","ncRNA","3'UTR","tRNA"),
+#' annot = annot_g_minimal[[1]], region = c("CDS","asRNA","5'UTR","ncRNA","3'UTR","tRNA"),
 #' color_region = c("grey0", "red", "blue", "orange", "yellow", "green",
 #' "white", "darkseagreen1", "grey50", "black"),
 #' color_text.1 = "grey0", color_text.2 = "black", color_TU = "blue",
 #' size_tu = 1.6, size_locusTag = 1.6, size_gene = 1.6, Limit = 10,
-#' shape=22, col_outiler = "grey50", Alpha=0.5,
-#' col_coverage = "grey", limit_intensity = NA,
+#' shape=22, col_outiler = "grey50", Alpha=0.5, limit_intensity = NA,
 #' face="bold", tick_length = .3, arrow.color = "darkseagreen1",
 #' minVelocity = 3000, medianVelocity = 6000,
 #' col_above20 = "#00FFFF", fontface = "plain", shape_above20 = 14,
-#' axis_text_y_size = 3, axis_title_y_size = 6, TI_threshold = 1.1,
-#' p_value_TI=0.05, p_value_manova = 0.05, termination_threshold = 1,
-#' iTSS_threshold = 1.01, p_value_int = 0.05, p_value_event = 0.05,
-#' p_value_hl = 0.05, event_duration_ps = -2, event_duration_itss = 2,
-#' HL_threshold=20, HL_threshold_color_1="black",
-#' ps_color="orange", iTSS_I_color="blue")
+#' axis_text_y_size = 3, axis_title_y_size = 6)
 #'
 #' @export
 
+setwd("/home/loub/rifi_comparison/analysis_window/plot/")
+#setwd("/home/lyoussar/rifi_comparison/analysis_window/plot/")
 source("annotation_plot_comp.r")
 source("functions_visuali_condts.r")
-source("strand_comp_function.r")
+source("strand_comp_Comb_function.r")
+load("annot_g_c.rda")
+load("annot_g.rda")
+setwd("/home/loub/rifi_comparison/outputs")
+
+load("data_combined_se.rdata")
+load("df_comb_se.rda")
+
+
 rifi_visualization_comparison <-
     function(data,
-             genomeLength,
-             annot,
-             condition = c("sc", "fe"),
+             data_c,
+             genomeLength = annot_g[[2]],
+             annot = annot_g[[1]],
+             condition = c("cdt1", "cdt2"),
              Strand = c("+", "-"),
-             coverage = 0,
-             chr_fwd = NA,
-             chr_rev = NA,
              region = c("CDS", "asRNA", "5'UTR", "ncRNA", "3'UTR", "tRNA"),
              color_region = c(
                  "grey0",
@@ -175,17 +119,16 @@ rifi_visualization_comparison <-
                  "grey50",
                  "black"
              ),
+             color_TU = c("cyan", "yellow", "orange"),
+             scaling_TU = c(0, 3.4, 6.6),
              color_text.1 = "grey0",
              color_text.2 = "black",
-             color_TU = c("cyan", "red", "orange"),
-             scaling_TU = c(0, 3.4, 6.6),
              Alpha = 0.5,
              size_tu = 1.6,
              size_locusTag = 1.6,
              size_gene = 1.6,
              Limit = 10,
              shape = 22,
-             col_coverage = "grey",
              face = "bold",
              tick_length = .3,
              arrow.color = "darkseagreen1",
@@ -195,34 +138,16 @@ rifi_visualization_comparison <-
              axis_text_y_size = 3,
              axis_title_y_size = 6,
              iTSS_threshold = 1.2,
-             p_value_int = 0.05,
-             p_value_event = 0.05,
-             p_value_hl = 0.05,
-             p_value_TI = 0.05,
              p_value_manova = 0.05,
-             event_duration_ps = 1,
-             event_duration_itss = -1,
-             termination_threshold = 0.8,
-             HL_threshold_1 = log2(1.5),
-             HL_threshold_2 = -log2(1.5),
-             HL_threshold_color_1 = "black",
-             HL_threshold_color_2 = "green",
-             ps_color = "orange",
-             iTSS_I_color = "blue") {
-        ##########################data preparation##################################
-        #I. add coverage if its available from RNA-seq
-        tmp <-
-            coverage_function(coverage = coverage,
-                              chr_fwd = chr_fwd,
-                              chr_rev = chr_rev)
-        if (!is.na(tmp)) {
-            tmp.c1 <- strand_selection(tmp, "+")
-            tmp.c2 <- strand_selection(tmp, "-")
-        }
+             termination_threshold = 0.8
+    ) {
+        ##########################data preparation#############################
         #II. input for the main features split into 2 data frames according to
         #strand orientation
         tmp.1 <- strand_selection(data, "+")
         tmp.2 <- strand_selection(data, "-")
+        tmp.3 <- strand_selection(data_c, "+")
+        tmp.4 <- strand_selection(data_c, "-")  
         #replace infinitive in velocity fragment with NA
         tmp.1 <- velo_function(tmp.1)
         tmp.2 <- velo_function(tmp.2)
@@ -237,20 +162,19 @@ rifi_visualization_comparison <-
         #################################plot###############################
         #IV. the general plot
         pdf.options(
-            reset = TRUE,
             onefile = TRUE,
             width = 8,
             height = 5.3
         )
         pdf("genome_fragments_comparison.pdf")
-        suppressWarnings(for (i in seq_len(length(frag) - 1)) {
+        suppressWarnings(for (i in seq_len(length(frag) - 1)) {#seq_len(length(frag) - 1)
             p <- list()
             p.1 <- list()
             print(i)
             if (i == 1) {
                 frag[i] <- 0
             } else if (i == (length(frag) - 1)) {
-#to have homogeneous annotation scaling, 10000 is added to the last frag vector
+                #to have homogeneous annotation scaling, 10000 is added to the last frag vector
                 frag[i + 1] <- frag[i] + 10000
             }
             #adjust position for genes split on two pages
@@ -263,6 +187,11 @@ rifi_visualization_comparison <-
                 tmp.1[between(tmp.1$position, frag[i], frag[c(i + 1)]),]
             df2 <-
                 tmp.2[between(tmp.2$position, frag[i], frag[c(i + 1)]),]
+            df3 <-
+                tmp.3[between(tmp.3$position, frag[i], frag[c(i + 1)]),]
+            df4 <-
+                tmp.4[between(tmp.4$position, frag[i], frag[c(i + 1)]),]
+            
             df1_1 <- df1[!is.na(df1$ID),]
             #avoid plot empty pages in case of small data
             if (nrow(df1) == 0 &
@@ -307,9 +236,9 @@ rifi_visualization_comparison <-
                     pos.1 = pos.1,
                     pos.2 = pos.2
                 )
-     
-        #########################empty data positive strand##################
-        
+            
+            #########################empty data positive strand##################
+            
             if (nrow(df1) == 0) {
                 p_positive <- empty_data_positive(
                     data_p = df1,
@@ -322,38 +251,31 @@ rifi_visualization_comparison <-
                 )
                 p1 <- p_positive[[1]]
                 p2 <- p_positive[[2]]
-                p3 <- p_positive[[3]]
+                #p3 <- p_positive[[3]]
             }
             
-        ############################positive_strand_plot######################
+            ############################positive_strand_plot######################
             if (nrow(df1) != 0) {
                 p_positive <- strand_function(
                     data = data,
                     data_p = df1,
                     data_n = df2,
+                    data_p_c = df3,
+                    data_n_c = df4,
                     Strand = Strand,
                     condition = condition,
-                    coverage = coverage,
                     frag,
                     i,
                     fontface = fontface,
-                    HL_threshold_1 = HL_threshold_1,
-                    HL_threshold_2 = HL_threshold_2,
-                    HL_threshold_color_1 = HL_threshold_color_1,
-                    axis_text_y_size = axis_text_y_size,
                     axis_title_y_size = axis_title_y_size,
-                    p_value_int = p_value_int,
-                    p_value_event = p_value_event,
-                    p_value_hl = p_value_hl,
-                    event_duration_ps = event_duration_ps,
-                    event_duration_itss = event_duration_itss
+                    axis_text_y_size = axis_text_y_size
                 )
                 p1 <- p_positive[[1]]
                 p2 <- p_positive[[2]]
-                p3 <- p_positive[[3]]
+                #p3 <- p_positive[[3]]
                 p4 <- p_positive[[4]]
                 p5 <- p_positive[[5]]
-                p6 <- p_positive[[6]]
+                #p6 <- p_positive[[6]]
             }
             #########################empty data reverse strand##################
             if (nrow(df2) == 0) {
@@ -365,18 +287,28 @@ rifi_visualization_comparison <-
                     axis_text_y_size = axis_text_y_size,
                     Limit = Limit
                 )
-                p6 <- p_negative[[1]]
+                #p6 <- p_negative[[1]]
                 p5 <- p_negative[[2]]
                 p4 <- p_negative[[3]]
             }
             ############################Title and plot#############################
-            p <- list(p1, p2, p3, p7, p6, p5, p4)
+            p <- list(p1, p2, p7, p5, p4)
             egg::ggarrange(
                 plots = p,
                 ncol = 1,
-                nrow = 7,
-                heights = c(4.5, 4.5, 4.5, 6.5, 4.5, 4.5, 4.5)
+                nrow = 5,
+                heights = c(5, 5, 6, 5, 5)
             )
         })
         dev.off()
     }
+
+#rifi_visualization_comparison(data = d, data_c = dc)
+
+rifi_visualization_comparison(
+    data = data_combined, #data combined from probe_sta (rifi output)
+    data_c = df_comb, #data from DP
+    genomeLength = annot_g[[2]],
+    annot = annot_g[[1]]
+)
+
