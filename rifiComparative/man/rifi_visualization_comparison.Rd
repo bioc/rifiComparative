@@ -151,11 +151,11 @@ my_segment_T: plots terminals and pausing sites labels.
 }
 \examples{
 data(data_combined_minimal)
-data(df_comb_minimal)
+data(stats_df_comb_minimal)
 data(annot_g)
 rifi_visualization_comparison(
     data = data_combined_minimal,
-    data_c = df_comb_minimal,
+    data_c = stats_df_comb_minimal,
     genomeLength = annot_g[[2]],
     annot = annot_g[[1]]
     ) 

@@ -6,7 +6,7 @@
 'fragmentation': fragments the half-life and intensity into segments using
 the penalties output.}
 \usage{
-fragmentation(data, pen_HL, pen_int)
+fragmentation(data, pen_HL, pen_int, cores = 2)
 }
 \arguments{
 \item{data}{data frame: data frame combined data by column}
@@ -16,6 +16,8 @@ for half-life}
 
 \item{pen_int}{list: list of the penalties set optimal for the fragmentation
 for intensity}
+
+\item{cores}{integer: the number of assigned cores for the task}
 }
 \value{
 two data frames with half-life and intensity fragments and the mean
@@ -27,7 +29,7 @@ of the coefficient fragment based.
 the penalties output.
 }
 \examples{
-data(df_comb_minimal)
+data(penalties_df)
 data(pen_HL)
 data(pen_int)
 }

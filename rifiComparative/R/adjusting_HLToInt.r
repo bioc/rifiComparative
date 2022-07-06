@@ -53,8 +53,8 @@
 #'      decay(condition2))}
 #'      \item{log2FC(synthesis_rate):}{Integer, sum of log2FC(decay_rate) and 
 #'      log2FC(intensity)}
-#'      \item{Log2FC(HL)-Log2FC(int):}{Integer, sum of log2FC(decay_rate) and 
-#'      log2FC(intensity)}
+#'      \item{Log2FC(HL)-Log2FC(int):}{Integer, difference between log2FC(decay_rate) 
+#'       and log2FC(intensity)}
 #'      \item{intensity_FC:}{Integer, log2FC(mean(intensity(condition1))/mean(
 #'      intensity(condition2)))}
 #'      \item{Log2FC(HL)-Log2FC(int):}{Integer, sum of log2FC(decay_rate) and 
@@ -66,8 +66,8 @@
 #' @examples
 #' data(stats_df_comb_minimal) 
 #' data(annot_g)
-#' df <- adjusting_HLToInt(data = stats_df_comb_minimal, annotation = 
-#' annot_g[[1]])
+#' df_adjusting_HLToInt <- adjusting_HLToInt(data = stats_df_comb_minimal, 
+#' annotation = annot_g[[1]])
 #' @export
 
 
@@ -167,14 +167,14 @@ adjusting_HLToInt <-
                 
                 tryCatch({
                     region <-
-                        paste0(unique(ann[interv[1]:interv[2], "region"]), collapse = "|")
+                        paste0(unique(ann[interv[1]:interv[2], "region"]), 
+                               collapse = "|")
                     gene <-
-                        paste0(unique(ann[interv[1]:interv[2], "gene"]), collapse = "|")
+                        paste0(unique(ann[interv[1]:interv[2], "gene"]), 
+                               collapse = "|")
                     locus_tag <-
                         paste0(unique(ann[interv[1]:interv[2], "locus_tag"]),
                                collapse = "|")
-                    # Description <-
-                    #     paste0(unique(ann[interv[1]:interv[2], "Annotation"]), collapse = "|")
                 }, error = function(e) {
                     "No match for the annotation"
                 })
@@ -242,8 +242,9 @@ adjusting_HLToInt <-
                             #mean of the distance on the fragment int
                             Mean_int_fragment <-
                                 c(Mean_int_fragment, fg_int$mean)
-                            #decay_rate is calculated dividing log2/mean(HL) of both condition
-                            #please refer to calculating_rate function
+                            # decay_rate is calculated dividing log2/mean(HL) of 
+                            # both condition
+                            # please refer to calculating_rate function
                             Decay_rate <- c(Decay_rate,
                                             calculating_rate(hl_int)[[1]])
                             ##ratio between log2FC(decay) and log2FC(intensity)
@@ -258,7 +259,8 @@ adjusting_HLToInt <-
                                     mean(hl_int$intensity.cdt1) / 
                                         mean(hl_int$intensity.cdt2)
                                 ))
-                            # synthesis_rate is calculated from steady-state and decay rate
+                            # synthesis_rate is calculated from steady-state and
+                            # decay rate
                             # multiplication of log2FC(decay) and log2FC(intensity)
                             Synthesis_rate <- c(
                                 Synthesis_rate,

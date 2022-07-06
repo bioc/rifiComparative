@@ -14,20 +14,25 @@
 #' fragment_inty_pen.r
 #'
 #' @param data data frame with the joined columns from differential 
-#' expression and output of rifi_stats
+#' expression and output of rifi_stats.
+#' @param cores integer: the number of assigned cores for the task.
 #' 
-#' @return a list of penalties, the first set for HL and the second for
-#' intensity at time 0.
+#' @return a list of data frame and penalties, The first element is data frame
+#' with 2 more variables, second and third are HL and intensity penalties
+#' respectively.
 #'
 #' @examples
 #' data(df_comb_minimal) 
-#' pen_HL <- penalties(df_comb_minimal)[[1]]
-#' pen_int <- penalties(df_comb_minimal)[[2]]
+#' penalties_df <- penalties(df_comb_minimal)[[1]]
+#' pen_HL <- penalties(df_comb_minimal)[[2]]
+#' pen_int <- penalties(df_comb_minimal)[[3]]
 #' @export
 
-penalties <- function(data){
+
+penalties <- function(data, cores = 2){
 # calculate the difference of half-life from both conditions. 
 # difference is referred to distance 
+
     data[,"distance_HL"] <-
         data[, "half_life.cdt1"] - data[, "half_life.cdt2"]
     
@@ -37,7 +42,7 @@ penalties <- function(data){
     pen_HL <- make_pen(
         probe = data,
         FUN = fragment_HL_pen,
-        cores = 60,
+        cores = cores,
         logs = as.numeric(rep(NA, 8)),
         dpt = 1,
         smpl_min = 10,
@@ -58,7 +63,7 @@ penalties <- function(data){
     pen_int <- make_pen(
         probe = data,
         FUN = fragment_inty_pen,
-        cores = 60,
+        cores = cores,
         logs = as.numeric(rep(NA, 8)),
         dpt = 1,
         smpl_min = 10,
@@ -70,7 +75,7 @@ penalties <- function(data){
         end_pen_out = 3.5,
         rez_pen_out = 7
     )
-    return(list(pen_HL, pen_int))
+    return(list(data, pen_HL, pen_int))
 }
 
 

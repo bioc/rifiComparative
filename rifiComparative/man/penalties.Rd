@@ -9,15 +9,18 @@ fragmentation using dynamic programming. The segmentation of the HL uses the
 difference between 2 conditions and the segmentation of the intensity uses
 the log2FC. The function uses 4 functions:}
 \usage{
-penalties(data)
+penalties(data, cores = 2)
 }
 \arguments{
 \item{data}{data frame with the joined columns from differential
-expression and output of rifi_stats}
+expression and output of rifi_stats.}
+
+\item{cores}{integer: the number of assigned cores for the task.}
 }
 \value{
-a list of penalties, the first set for HL and the second for
-intensity at time 0.
+a list of data frame and penalties, The first element is data frame
+with 2 more variables, second and third are HL and intensity penalties
+respectively.
 }
 \description{
 score_fun_ave.r
@@ -27,6 +30,7 @@ fragment_inty_pen.r
 }
 \examples{
 data(df_comb_minimal) 
-pen_HL <- penalties(df_comb_minimal)[[1]]
-pen_int <- penalties(df_comb_minimal)[[2]]
+penalties_df <- penalties(df_comb_minimal)[[1]]
+pen_HL <- penalties(df_comb_minimal)[[2]]
+pen_int <- penalties(df_comb_minimal)[[3]]
 }

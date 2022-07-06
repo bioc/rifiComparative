@@ -8,6 +8,7 @@
 #' @import ggrepel
 #' @import LSD
 #' @importFrom cowplot background_grid
+#' @importFrom reshape2 melt
 #' @importFrom doMC registerDoMC
 #' @importFrom foreach %dopar% foreach
 #' @importFrom graphics abline axis curve legend par points text plot

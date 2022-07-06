@@ -89,11 +89,11 @@
 #'
 #' @examples
 #' data(data_combined_minimal)
-#' data(df_comb_minimal)
+#' data(stats_df_comb_minimal)
 #' data(annot_g)
 #' rifi_visualization_comparison(
 #'     data = data_combined_minimal,
-#'     data_c = df_comb_minimal,
+#'     data_c = stats_df_comb_minimal,
 #'     genomeLength = annot_g[[2]],
 #'     annot = annot_g[[1]]
 #'     ) 
@@ -196,8 +196,8 @@ rifi_visualization_comparison <-
                 next ()
             }
             ##########################annotation section#########################
-            #an is the annotation dataframe upon the position on the plot, its used
-            # to loop into exactly the number of region contained in the gff3
+            # an is the annotation dataframe upon the position on the plot, its 
+            # used to loop into exactly the number of region contained in the gff3
             an.1 <-
                 annot[between(annot$start, frag[i], frag[c(i + 1)]), ]
             an <- annot[between(annot$start, pos.1, pos.2), ]
@@ -206,7 +206,7 @@ rifi_visualization_comparison <-
             if (nrow(an.1) == 0 & nrow(df1) == 0 & nrow(df2) == 0) {
                 next ()
             }
-            #if(nrow(df1) != 0 | nrow(df2) != 0){
+         
             p7 <-
                 annotation_plot(
                     data_p=df1,
@@ -234,7 +234,7 @@ rifi_visualization_comparison <-
                     pos.1 = pos.1,
                     pos.2 = pos.2
                 )
-            #}
+            
             #########################empty data positive strand#################
             
             if (nrow(df1) == 0) {

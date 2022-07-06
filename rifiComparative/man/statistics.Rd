@@ -9,12 +9,12 @@ The function used is t_test_function.}
 statistics(data)
 }
 \arguments{
-\item{data}{data frame of the joined column}
+\item{data}{data frame: data frame output of fragmentation}
 }
 \value{
 a list of two data frames, the first one contains all segments with
 p_value and p_value adjusted. The second one removes the duplicated segments
-from intensity and could be saved as excel file.
+from intensity and could be saved as an excel file.
 }
 \description{
 'statistics' uses t-test to check HL and intensity segments significance. The
@@ -22,8 +22,7 @@ function return the data frame with p_value p_value adjusted.
 The function used is t_test_function.
 }
 \examples{
-data(df_comb_minimal)
-df_comb_minimal <- statistics(data= fragment_int)[[1]]
+data(fragment_int)
+stats_df_comb_minimal <- statistics(data= fragment_int)[[1]]
 df_comb_uniq_minimal <- statistics(data= fragment_int)[[2]]
-write_xlsx(df_comb_uniq_minimal, "df_comb_uniq_minimal.xlsx")
 }

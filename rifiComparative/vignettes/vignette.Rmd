@@ -70,10 +70,8 @@ saved and used as input for the next analysis.
 
 The functions used are:
 
-`loading_fun`: you need to set the path for rifi statistics output from
-each condition on one side and set the path for home directory where all objects
-will be saved on other side. The "cdt" is added referring to the sample 
-condition. 
+`loading_fun`: you need to load the rifi statistics outputs from
+each condition and put all in one directory. The "cdt" is added referring to the sample condition. 
 
 <span style="color:red"> Very important: </span> you will need to run the 
 differential expression at probe/bin level. This is the log2FC(intensity) or 
@@ -82,39 +80,41 @@ and strand columns. Save the first two as 'logFC_int' and 'P.Value'.
 You can use either `left_join` or `right_join` from dplyr package to join 
 both data by strand and position. 
 <br/><br/>
+
 ``` {r loading_fun, eval = TRUE}
-inp_s <- rifiComparative:::loading_fun(
-    data1 = "../data/stats_se_cdt1.rda", 
-    data2 = "../data/stats_se_cdt2.rda", 
-    data3 = "../data/differential_expression.rda")[[1]]
-print("Head of inp_s")
+data(stats_se_cdt1)
+data(stats_se_cdt2)
+data(differential_expression)
+inp_s <-  
+    loading_fun(stats_se_cdt1, stats_se_cdt2, differential_expression)[[1]]
 head(inp_s, 5)
-
-
-inp_f <- rifiComparative:::loading_fun(
-    data1 = "../data/stats_se_cdt1.rda", 
-    data2 = "../data/stats_se_cdt2.rda",
-    data3 = "../data/differential_expression.rda")[[2]]
-print("Head of inp_f")
+inp_f <- 
+    loading_fun(stats_se_cdt1, stats_se_cdt2, differential_expression)[[2]]
 head(inp_f, 5)
 ```
 <br/><br/>
+
 `joining_data_row`: contains `joining_data_row` function. It gathers 
 dataframe from both conditions in one by rows. The object is called 
 data_combined_se.rda
 <br/><br/>
+
 ``` {r joining_data_row, eval = TRUE}
-data_combined_minimal <- joining_data_row(
-    input1 = inp_s,
-    input2 = inp_f)
+data(inp_s)
+data(inp_f)
+data_combined_minimal <- 
+joining_data_row(input1 = inp_s, input2 = inp_f)
 head(data_combined_minimal, 5)
 ```
 <br/><br/>
+
 `joining_data_column`: contains `joining_data_column` function. It gathers 
 dataframe from both conditions in one by columns. The object is called 
 df_comb_se.rda
 <br/><br/>
+
 ``` {r joinging_data_column, eval = TRUE}
+data(data_combined_minimal)
 df_comb_minimal <- joining_data_column(data = data_combined_minimal)
 head(df_comb_minimal, 5)
 ```
@@ -123,9 +123,10 @@ head(df_comb_minimal, 5)
 
 Same as rifi workflow, to get the best segmentation we need the optimal penalties. 
 To calculate HL penalty, the difference between half-life from both conditions
-is calculated and added as distance_HL column. However the logFC_int is used to 
-assign penalties for intensity values and named distance_int. 
-`make_pen` function is applied in both cases.
+is calculated and added as distance_HL variable to df_comb_minimal data frame.
+On other hand the logFC_int is used to assign penalties for intensity values and
+added as distance_int variable. df_comb_minimal with the additional variables is
+named penalties_df.
 
 The functions needed for penalty are:
 
@@ -161,7 +162,8 @@ penalties for the dynamic programming of half-life fragments. The function used
 for `fragment_HL_pen` is `score_fun_ave`. `score_fun_ave` scores the values of 
 y on how close they are to the mean. for more details, see below.
 <br/><br/>
-``` {r make_pen HL, eval = TRUE}
+
+``` {r make_pen HL, eval = FALSE}
 
 df_comb_minimal[,"distance_HL"] <-
     df_comb_minimal[, "half_life.cdt1"] - df_comb_minimal[, "half_life.cdt2"]
@@ -190,7 +192,7 @@ pen_HL <- make_pen(
 penalties for the dynamic programming of intensity fragments. 
 The function used is `score_fun_ave`.
 
-``` {r make_pen int, eval = TRUE}
+``` {r make_pen int, eval = FALSE}
 
 df_comb_minimal[,"distance_int"] <- df_comb_minimal[,"logFC_int"]
 
@@ -209,6 +211,15 @@ pen_int <- make_pen(
     end_pen_out = 3.5,
     rez_pen_out = 7
 )
+```
+<br/><br/>
+
+``` {r penalties, eval = TRUE}
+data(df_comb_minimal) 
+penalties_df <- penalties(df_comb_minimal)[[1]]
+pen_HL <- penalties(df_comb_minimal)[[2]]
+pen_int <- penalties(df_comb_minimal)[[3]]
+head(penalties_df, 5)
 ```
 <br/><br/>
 
@@ -235,9 +246,9 @@ information to the probe based data frame. The columns "HL_comb_fragment" and
 half-life_fragments and assigns the mean of each fragment.
 
 ``` {r fragment_HL, eval = TRUE}
-df_comb_minimal <-
+penalties_df <-
     fragment_HL(
-    probe = df_comb_minimal,
+    probe = penalties_df,
     cores = 2,
     pen = pen_HL[[1]][[9]],
     pen_out = pen_HL[[1]][[10]]
@@ -255,13 +266,14 @@ The hierarchy is not followed, fragments from different size could be generated
 independently of half-life fragments.
 
 ``` {r fragment_inty, eval = TRUE}
-df_comb_minimal <-
+fragment_int <-
     fragment_inty(
-        probe = df_comb_minimal,
+        probe = penalties_df,
         cores = 2,
         pen = pen_int[[1]][[9]],
         pen_out = pen_int[[1]][[10]]
     )
+head(fragment_int, 5)
 ```
 <br/>
 
@@ -272,27 +284,15 @@ fragmentation, for more details, see below.
 
 ### 4. Statistics
 
-To check segment significance, t-test with two.sided was used. Each fragment was tested for the number of probes involved in each condition.
+To check segment significance, t-test with two.sided was used. Each fragment was
+tested for the number of probes involved in each condition.
 
 ``` {r t_test_function_HL, eval = TRUE}
-df_comb_minimal <-
-    t_test_function(
-        data = df_comb_minimal,
-        par = "HL",
-        par1 = "half_life"
-    )
+data(fragment_int)
+stats_df_comb_minimal <- statistics(data= fragment_int)[[1]]
+df_comb_uniq_minimal <- statistics(data= fragment_int)[[2]]
 ```
 
-
-``` {r t_test_function_int, eval = TRUE}
-df_comb_minimal <-
-    t_test_function(
-        data = df_comb_minimal,
-        par = "intensity",
-        par1 = "intensity"
-    )
-head(df_comb_minimal, 5)
-```
 
 ### 5. Visualization
 
@@ -300,13 +300,16 @@ The visualization depicts half-life and intensity slots of the fragments result
 of the dynamic programming. Since hierarchy is not applied, the fragments from 
 half-life and intensity are independent.
 
-``` {r rifi_visualization_comparison, eval = TRUE}
+``` {r rifi_visualization_comparison, eval = FALSE}
+data(data_combined_minimal)
+data(stats_df_comb_minimal)
+data(annot_g)
 rifi_visualization_comparison(
-    data = data_combined_minimal,
-    data_c = df_comb_minimal,
-    genomeLength = annot_g[[2]],
-    annot = annot_g[[1]]
-)
+     data = data_combined_minimal,
+     data_c = stats_df_comb_minimal,
+     genomeLength = annot_g[[2]],
+     annot = annot_g[[1]]
+     )
 ```
 
 Three objects are required:
@@ -339,7 +342,8 @@ To generate the data frame, two objects are required:
 
 The functions used are:
 
-`p_value_function` extracts and return the p_values of HL and intensity segments respectively.
+`p_value_function` extracts and return the p_values of HL and intensity segments
+respectively.
 
 `eliminate_outlier_hl` eliminates outliers from HL fragments.
 
@@ -351,7 +355,8 @@ to HL_fragments and their lengths.
 `mean_length_hl` extracts the mean of log2FC(HL) fragments adapted to the 
 intensity fragments and their lengths.
 
-`calculating_rate` calculates decay rate and log2FC(intensity). Both are used to calculate synthesis rate.
+`calculating_rate` calculates decay rate and log2FC(intensity). Both are used to
+calculate synthesis rate.
 
 The output data frame contains the corresponding columns:
 
@@ -371,67 +376,117 @@ The output data frame contains the corresponding columns:
  **Log2FC(HL)-Log2FC(int)**: sum of log2FC(decay_rate) and log2FC(intensity).
  **intensity_FC**: log2FC(mean(intensity(condition1))/mean(intensity(condition2))).
  **Log2FC(HL)-Log2FC(int)**: sum of log2FC(decay_rate) and log2FC(intensity).
- **p_value**:indicated by "*" means at least one fragment either HL fragment or intensity fragment has a significant p_value.
+ **p_value**:indicated by "*" means at least one fragment either HL fragment or 
+ intensity fragment has a significant p_value.
 
 ``` {r adjusting_HLToInt, eval = TRUE}
-load("../data/annot_g.rda")
-df_mean_minimal <- adjusting_HLToInt(data = df_comb_minimal)
-colnames(df_mean_minimal) <-
-    c(
-        "position",
-        "region",
-        "gene",
-        "locus_tag",
-        "strand",
-        "fragment_HL",
-        "fragment_int",
-        "position_frg_int",
-        "mean_HL_fragment",
-        "mean_int_fragment",
-        "log2FC(decay_rate)",
-        "Log2FC(HL)-Log2FC(int)",
-        "log2FC(synthesis_rate)",
-        "intensity_FC",
-        "p_value"
-    )
-#write_xlsx(df_mean_minimal, "df_mean_minimal.xlsx")
+data(stats_df_comb_minimal) 
+data(annot_g)
+df_adjusting_HLToInt <- adjusting_HLToInt(data = stats_df_comb_minimal, 
+                                          annotation = annot_g[[1]])
+head(df_adjusting_HLToInt, 5)
 ```
 
-## IV. Figures
+## IV. Plots
 
+A serie of plots could be generated using `figures_fun` function. The function
+includes several functions:
 
-
-
-
-### 1. decay rate vs. synthesis rate plot
-
-The generated data frame "df_mean_minimal" could be used to plot 
-log2FC(decay.rate) vs. log2FC(synthesis.rate).
+`plot_decay_synt`
+`plot_heatscatter`
+`plot_density`
+`plot_histogram`
+`plot_scatter`
+`plot_volcano`
 
 <br/><br/>
-``` {r log2FC, echo = FALSE, fig.cap = "**log2FC(Synthesis R/Intensity)**", out.width = '100%'}
+``` {r figures_fun, eval = FALSE, echo = TRUE, out.width = '100%'}
+ data(data_combined_minimal)
+ data(df_comb_minimal)
+ data(differential_expression) 
+ data(df_mean_minimal)
+ figures_fun(data.1 = df_mean_minimal, data.2 = data_combined_minimal, 
+ input.1 = df_comb_minimal, input.2 = differential_expression, cdt1 = "sc", 
+ cdt2 = "fe") 
+```
+
+### 1. `plot_decay_synt`
+
+The generated data frame "df_mean_minimal" could be used to plot 
+changes in RNA decay rates (log fold, x-axis) versus the
+changes in RNA synthesis rates (log fold, y-axis) in the condition 1 versus 
+condition 2. The black lines horizontal, vertical and diagonal are the median 
+of synthesis_rate, decay_rate and mRNA at time 0 respectively. Dashed gray lines
+indicate 0.5-fold changes from 0 (gray lines) referring to unchanged fold.
+Coloration could be adjusted upon the parameter selected. In this case decay rate 
+above .5 and synthesis rate below -.5 are highlighted in yellow.
+Segments could be labeled using geom_text_repel function, they are commented on
+the function.
+
+<br/><br/>
+``` {r Figure 2, echo = FALSE, fig.cap = "**log2FC(Decay rate vs. Synthesis rate)**", out.width = '100%'}
 knitr::include_graphics("Decay_rate_vs_Synthesis_rate.png")
 ```
 <br/>
-<p align="center">
-**Figure 2**: log2FC
-</p>
+
+### 2. `plot_heatscatter`
+
+Heatscatter plot could be generated using "df_mean_minimal" data frame. It plots
+the changes in RNA decay rates (log fold, x-axis) versus the changes in RNA 
+synthesis rates (log fold, y-axis) in the condition 1 versus condition 2. 
+The coloring indicates the local point density.
 
 <br/><br/>
-``` {r density, echo = FALSE, fig.cap = "**HL density**", out.width = '100%'}
-knitr::include_graphics("density_HL.pdf")
+``` {r Figure 3, echo = FALSE, fig.cap = "**log2FC(heatscatter Decay rate vs. Synthesis rate)**", out.width = '100%'}
+knitr::include_graphics("heatscatter_Decay_rate_vs_Synthesis_rate.png")
 ```
 <br/>
-<p align="center">
-**Figure 3**: density
-</p>
+
+### 3. `plot_density`
+
+The function uses the "data_combined_minimal" to plot the probe/bin half-life 
+density in both conditions. Condition 1 and 2 could be
+indicated.
+
+<br/><br/>
+``` {r Figure 4, echo = FALSE, fig.cap = "**HL density**", out.width = '100%'}
+knitr::include_graphics("density_HL.png")
+```
+<br/>
+
+### 4. `plot_histogram`
+
+The function uses "df_comb_minimal" to plot a histogram of probe/bin half-life 
+categories from 2 to 20 minutes in both conditions. Condition 1 and 2 could be
+indicated.
+
+<br/><br/>
+``` {r Figure 5:, echo = FALSE, fig.cap = "**HL histogram categories**", out.width = '100%'}
+knitr::include_graphics("histogram_count.png")
+```
+<br/>
+
+### 5. `plot_scatter`
+
+A scatter plot of the bin/probe half-life. 
+
+<br/><br/>
+``` {r Figure 6:, echo = FALSE, fig.cap = "**HL Scatter Plot **", out.width = '100%'}
+knitr::include_graphics("scatter_plot_HL.png")
+```
+<br/>
 
 
+### 6. `plot_volcano`
 
-<p align="center">
-**Figure 4**: density
-</p>
-
+A volcano plot of statistical significance (P value) versus magnitude of change 
+(fold change).
+    
+<br/><br/>
+``` {r Figure 7:, echo = FALSE, fig.cap = "**Volcano Plot**", out.width = '100%'}
+knitr::include_graphics("volcano_plot.png")
+```
+<br/>
 
 ## III. Additional functions
 
@@ -453,7 +508,8 @@ vector of outliers separated by ",".
 
 `gff3_preprocess` processes gff3 file from database, extracting gene names and
 locus_tag from all coding regions (CDS). Other features like UTRs, ncRNA, asRNA
-ect.. if available and the genome length are extracted. The output is a list of 2 elements.
+ect.. if available and the genome length are extracted. The output is a list of 
+2 elements.
 
 The output data frame from `gff3_preprocess` function contains the following
 columns:
@@ -467,13 +523,9 @@ it
 f. *locus_tag*: locus_tag annotation
 <br/><br/>
 ``` {r gff3_preprocess}
-# gff3_preprocess(path = gzfile(system.file(
-#   "extdata", "gff_e_coli.gff3.gz", package = "rifi"
-# )))
-# gff3_preprocess(path = gzfile(
-#   system.file("extdata", "gff_synechocystis_6803.gff.gz",
-#               package = "rifi")
-# ))
+gff3_preprocess(path = gzfile(
+   system.file("extdata", "gff_synechocystis_6803.gff.gz", package = "rifiComparative")
+ ))
 ```
 <br/><br/>
 

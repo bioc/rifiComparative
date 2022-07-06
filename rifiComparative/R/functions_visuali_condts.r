@@ -364,3 +364,24 @@ meanPosition <- function(input, parameter) {
   return(input)
 }
 
+label_log2_function <-
+    function(x)
+        parse(text = paste0('2^', log(x, 2)))
+
+label_square_function <- function(x)
+    round(sqrt(x), 0)
+
+coverage_function <- function(coverage, chr_fwd, chr_rev) {
+    if (coverage == 1) {
+        chr_fwd <- cbind.data.frame(seq_along(chr_fwd), chr_fwd, strand = "+")
+        colnames(chr_fwd) <- c("position", "coverage", "strand")
+        chr_rev <-
+            cbind.data.frame(seq_along(chr_rev), chr_rev, strand = "-")
+        colnames(chr_rev) <- c("position", "coverage", "strand")
+        chr_cov <- rbind(chr_fwd, chr_rev)
+    } else{
+        chr_cov <- NA
+    }
+    return(chr_cov)
+}
+

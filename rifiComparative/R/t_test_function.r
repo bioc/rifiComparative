@@ -1,4 +1,4 @@
-t_test_function <- function(data, par, par1){
+t_test_function <- function(data, par, par1, frag_HL, frag_int){
     
     data[,paste0("p_value_distance_", par)] <- NA
     
@@ -12,8 +12,7 @@ t_test_function <- function(data, par, par1){
                         paste0(par1, ".cdt1")]
         par.cd2 <- data[which(data[,paste0(par,"_comb_fragment")] == frag[i]),
                         paste0(par1, ".cdt2")]
-        if (length(par.cd1) < 3 | length(par.cd2) < 3 | 
-            unique(par.cd1) == unique(par.cd2)) {
+        if (length(par.cd1) < 3 | length(par.cd2) < 3 ) {
             next ()
         } 
         t_h <-

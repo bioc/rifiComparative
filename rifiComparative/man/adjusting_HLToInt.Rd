@@ -33,8 +33,8 @@ fragments involved}
 decay(condition2))}
 \item{log2FC(synthesis_rate):}{Integer, sum of log2FC(decay_rate) and
 log2FC(intensity)}
-\item{Log2FC(HL)-Log2FC(int):}{Integer, sum of log2FC(decay_rate) and
-log2FC(intensity)}
+\item{Log2FC(HL)-Log2FC(int):}{Integer, difference between log2FC(decay_rate)
+and log2FC(intensity)}
 \item{intensity_FC:}{Integer, log2FC(mean(intensity(condition1))/mean(
 intensity(condition2)))}
 \item{Log2FC(HL)-Log2FC(int):}{Integer, sum of log2FC(decay_rate) and
@@ -69,6 +69,6 @@ used to calculate synthesis rate.
 \examples{
 data(stats_df_comb_minimal) 
 data(annot_g)
-df <- adjusting_HLToInt(data = stats_df_comb_minimal, annotation = 
-annot_g[[1]])
+df_adjusting_HLToInt <- adjusting_HLToInt(data = stats_df_comb_minimal, 
+annotation = annot_g[[1]])
 }

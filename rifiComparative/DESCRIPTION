@@ -31,6 +31,7 @@ Imports:
 	ggrepel,
 	DTA,
 	LSD,
+	reshape2,
 	SummarizedExperiment
 Suggests:
 	DescTools,
