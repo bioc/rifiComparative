@@ -40,7 +40,7 @@ Suggests:
 	BiocStyle
 VignetteBuilder: knitr	
 biocViews: Rifi, RNASeq, DifferentialExpression, GeneRegulation, Transcriptomics, Degradomics, Microarray, Software
-BugReports: https://github.com/CyanolabFreiburg/rifiComparative.git
+BugReports: https://github.com/CyanolabFreiburg/rifiComparative
 License: GPL-3 + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
