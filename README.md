@@ -19,11 +19,11 @@ The package provides a serie of plots to facilitate the analysis. Figure. 6 and 
 
 <sub> <b> Figure 4:</b> Adjusting half-life and intensity to each other. The adjustment was applied only if at least one fragment has a significant p_value. Numbers are just fragments indicator.</sub>
 
-<br/> <p align="center"> <img src="https://github.com/CyanolabFreiburg/rifiComparative/blob/main/vignettes/heatscatter_Decay_rate_vs_Synthesis_rate.png" alt="drawing" width="300"/> </p> 
+<br/> <p align="center"> <img src="https://github.com/CyanolabFreiburg/rifiComparative/blob/main/vignettes/Decay_rate_vs_Synthesis_rate.png"/> </p>
 
 <sub> <b> Figure 5:</b> a Plot changes in RNA decay rates (log fold, x-axis) versus the changes in RNA synthesis rates (log fold, y-axis) in the condition 1 versus condition 2. The black lines horizontal, vertical and diagonal are the median of synthesis_rate, decay_rate and mRNA at time 0 respectively. Dashed gray lines indicate 0.5-fold changes from 0 (gray lines) referring to unchanged fold. The points highlighted with yellow color show a decay rate \>= .5 and synthesis rate \<= -.5. </sub>
 
-<br/> <p align="center"> <img src="https://github.com/CyanolabFreiburg/rifiComparative/blob/main/vignettes/Decay_rate_vs_Synthesis_rate.png"/> </p>
+<br/> <p align="center"> <img src="https://github.com/CyanolabFreiburg/rifiComparative/blob/main/vignettes/heatscatter_Decay_rate_vs_Synthesis_rate.png"/> </p> 
 
 <sub> <b> Figure 6:</b> Plot of the changes in RNA decay rates (log fold, x-axis) versus the changes in RNA synthesis rates (log fold, y-axis) in the condition 1 versus condition 2. The coloring indicates the local point density. </sub>
 
