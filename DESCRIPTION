@@ -3,7 +3,7 @@ Title: 'rifiComparative' compares the output of rifi_stats from 2 different cond
 Version: 1.1.0
 Author: Loubna Youssar, Jens Georg
 Maintainer: Jens Georg <jens.georg@biologie.uni-freiburg.de>
-Description: 'rifiComparative' compares the output of rifi_stats from 2 different conditions. 'rifiComparative' is a continuation of rifi package to compare two conditions already treated with rifi. The half-life and mRNA at time 0 are fragmented. The fragmention of HL uses the difference between HL of both condtions and mRNA at time 0 uses the log2FC. The package provides segmentation, statistics, summary table, fragments visualization and some additional useful figures for further anaylsis. 
+Description: 'rifiComparative' is a continuation of rifi package. It compares two conditions output of rifi using half-life and mRNA at time 0 segments. As an input for the segmentation, the difference between half-life of both condtions and log2FC of the mRNA at time 0 are used. The segmentation 'rifiComparative' provides segmentation, statistics, summary table, fragments visualization and some additional useful plots for further anaylsis. 
 Depends:
 	R (>= 4.1)
 Imports:
@@ -14,6 +14,7 @@ Imports:
 	egg,
 	foreach,
 	ggplot2,
+	ggrebel,
 	graphics,
 	grDevices,
 	grid,

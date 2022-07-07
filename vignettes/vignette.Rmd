@@ -393,13 +393,18 @@ A serie of plots could be generated using `figures_fun` function. The function
 includes several functions:
 
 `plot_decay_synt`
+
 `plot_heatscatter`
+
 `plot_density`
+
 `plot_histogram`
+
 `plot_scatter`
+
 `plot_volcano`
 
-<br/><br/>
+<br/>
 ``` {r figures_fun, eval = FALSE, echo = TRUE, out.width = '100%'}
  data(data_combined_minimal)
  data(df_comb_minimal)
@@ -409,7 +414,7 @@ includes several functions:
  input.1 = df_comb_minimal, input.2 = differential_expression, cdt1 = "sc", 
  cdt2 = "fe") 
 ```
-
+<br/>
 ### 1. `plot_decay_synt`
 
 The generated data frame "df_mean_minimal" could be used to plot 
@@ -424,10 +429,11 @@ Segments could be labeled using geom_text_repel function, they are commented on
 the function.
 
 <br/><br/>
-``` {r Figure 2, echo = FALSE, fig.cap = "**log2FC(Decay rate vs. Synthesis rate)**", out.width = '100%'}
+``` {r, echo = FALSE, fig.cap = "**\\label{fig:figs}Decay rate vs. Synthesis rate**", out.width = '100%'}
 knitr::include_graphics("Decay_rate_vs_Synthesis_rate.png")
 ```
 <br/>
+
 
 ### 2. `plot_heatscatter`
 
@@ -437,7 +443,7 @@ synthesis rates (log fold, y-axis) in the condition 1 versus condition 2.
 The coloring indicates the local point density.
 
 <br/><br/>
-``` {r Figure 3, echo = FALSE, fig.cap = "**log2FC(heatscatter Decay rate vs. Synthesis rate)**", out.width = '100%'}
+``` {r, echo = FALSE, fig.cap = "**\\label{fig:figs}Heatscatter Decay rate vs. Synthesis rate**", out.width = '100%'}
 knitr::include_graphics("heatscatter_Decay_rate_vs_Synthesis_rate.png")
 ```
 <br/>
@@ -445,11 +451,10 @@ knitr::include_graphics("heatscatter_Decay_rate_vs_Synthesis_rate.png")
 ### 3. `plot_density`
 
 The function uses the "data_combined_minimal" to plot the probe/bin half-life 
-density in both conditions. Condition 1 and 2 could be
-indicated.
+density in both conditions. Condition 1 and 2 could be indicated.
 
 <br/><br/>
-``` {r Figure 4, echo = FALSE, fig.cap = "**HL density**", out.width = '100%'}
+``` {r, echo = FALSE, fig.cap = "**\\label{fig:figs}Half-life Density**", out.width = '100%'}
 knitr::include_graphics("density_HL.png")
 ```
 <br/>
@@ -461,7 +466,7 @@ categories from 2 to 20 minutes in both conditions. Condition 1 and 2 could be
 indicated.
 
 <br/><br/>
-``` {r Figure 5:, echo = FALSE, fig.cap = "**HL histogram categories**", out.width = '100%'}
+``` {r, echo = FALSE, fig.cap = "**\\label{fig:figs}Half-life Classification**", out.width = '100%'}
 knitr::include_graphics("histogram_count.png")
 ```
 <br/>
@@ -471,7 +476,7 @@ knitr::include_graphics("histogram_count.png")
 A scatter plot of the bin/probe half-life. 
 
 <br/><br/>
-``` {r Figure 6:, echo = FALSE, fig.cap = "**HL Scatter Plot **", out.width = '100%'}
+``` {r, echo = FALSE, fig.cap = "**\\label{fig:figs}Half-life Scatter Plot **", out.width = '100%'}
 knitr::include_graphics("scatter_plot_HL.png")
 ```
 <br/>
@@ -483,7 +488,7 @@ A volcano plot of statistical significance (P value) versus magnitude of change
 (fold change).
     
 <br/><br/>
-``` {r Figure 7:, echo = FALSE, fig.cap = "**Volcano Plot**", out.width = '100%'}
+``` {r, echo = FALSE, fig.cap = "**\\label{fig:figs}Volcano Plot**", out.width = '100%'}
 knitr::include_graphics("volcano_plot.png")
 ```
 <br/>
