@@ -1,40 +1,40 @@
 # =========================================================================
-# adjusting_HLToInt  Creates one table merging HL and intensity fragments with 
+# adjusting_HLToInt  Creates one table merging HL and intensity fragments with
 #                                   genome annotation
 # -------------------------------------------------------------------------
 #' 'adjusting_HLToInt': merges HL and intensity fragments with genome
 #' annotation.
-#' 
+#'
 #' 'adjusting_HLToInt' merges HL and intensity segments adapting the positions
-#' to each other and combining with genome annotation. 
-#' To make HL and intensity segments comparable, log2FC(HL) is used to generate 
-#' the data frame instead of distance. 
+#' to each other and combining with genome annotation.
+#' To make HL and intensity segments comparable, log2FC(HL) is used to generate
+#' the data frame instead of distance.
 #' The fragments should have a significant p_value from t-test at least from one
-#' segmentation, either HL or intensity. 
-#' 
+#' segmentation, either HL or intensity.
+#'
 #' The functions used are:
-#' 
-#' 1. p_value_function extracts and return the p_values of HL and intensity 
+#'
+#' 1. p_value_function extracts and return the p_values of HL and intensity
 #' segments respectively.
-#' 
+#'
 #' 2. eliminate_outlier_hl eliminates outliers from HL fragments.
-#' 
+#'
 #' 3. eliminate_outlier_int eliminates outliers from intensity fragments.
-#' 
-#' 4. mean_length_int calculates the mean of the log2FC(intensity) fragments 
+#'
+#' 4. mean_length_int calculates the mean of the log2FC(intensity) fragments
 #' adapted to HL_fragments and their lengths
-#' 
-#' 5. mean_length_hl calculates the mean of log2FC(HL) fragments adapted to the 
+#'
+#' 5. mean_length_hl calculates the mean of log2FC(HL) fragments adapted to the
 #' intensity fragments and their lengths.
-#' 
-#' 6. calculating_rate calculates decay rate and log2FC(intensity). Both are 
+#'
+#' 6. calculating_rate calculates decay rate and log2FC(intensity). Both are
 #' used to calculate synthesis rate.
 
 #' @param data data frame: data frame combined data by column
 #' @param Strand string: either "+" or "-"
 #' @param annotation data frame: data frame from processed gff3 file.
 #'
-#' @return 
+#' @return
 #'    \describe{
 #'      \item{position:}{Integer, position of the first fragment}
 #'      \item{region:}{String, region annotation covering the fragments}
@@ -43,30 +43,30 @@
 #'      \item{strand:}{Boolean. The bin/probe specific strand (+/-)}
 #'      \item{fragment_HL:}{String, HL fragments}
 #'      \item{fragment_int:}{String, intensity fragments}
-#'      \item{position_frg_int:}{Integer, position of the first fragment and 
+#'      \item{position_frg_int:}{Integer, position of the first fragment and
 #'      the last position of the last fragment}
-#'      \item{mean_HL_fragment:}{Integer, mean of the HL of the fragments 
+#'      \item{mean_HL_fragment:}{Integer, mean of the HL of the fragments
 #'      involved}
-#'      \item{mean_int_fragment:}{Integer, mean of the intensity of the 
+#'      \item{mean_int_fragment:}{Integer, mean of the intensity of the
 #'      fragments involved}
 #'      \item{log2FC(decay_rate):}{Integer, log2FC(decay(condition1)/
 #'      decay(condition2))}
-#'      \item{log2FC(synthesis_rate):}{Integer, sum of log2FC(decay_rate) and 
+#'      \item{log2FC(synthesis_rate):}{Integer, sum of log2FC(decay_rate) and
 #'      log2FC(intensity)}
-#'      \item{Log2FC(HL)-Log2FC(int):}{Integer, difference between log2FC(decay_rate) 
-#'       and log2FC(intensity)}
+#'      \item{Log2FC(HL)-Log2FC(int):}{Integer, difference between
+#'      log2FC(decay_rate) and log2FC(intensity)}
 #'      \item{intensity_FC:}{Integer, log2FC(mean(intensity(condition1))/mean(
 #'      intensity(condition2)))}
-#'      \item{Log2FC(HL)-Log2FC(int):}{Integer, sum of log2FC(decay_rate) and 
+#'      \item{Log2FC(HL)-Log2FC(int):}{Integer, sum of log2FC(decay_rate) and
 #'      log2FC(intensity)}
-#'      \item{p_value:}{String, indicated by "*" means at least one fragment 
+#'      \item{p_value:}{String, indicated by "*" means at least one fragment
 #'      either HL fragment or intensity fragment has a significant p_value}
 #'     }
 #'
 #' @examples
-#' data(stats_df_comb_minimal) 
+#' data(stats_df_comb_minimal)
 #' data(annot_g)
-#' df_adjusting_HLToInt <- adjusting_HLToInt(data = stats_df_comb_minimal, 
+#' df_adjusting_HLToInt <- adjusting_HLToInt(data = stats_df_comb_minimal,
 #' annotation = annot_g[[1]])
 #' @export
 
@@ -75,7 +75,6 @@ adjusting_HLToInt <-
     function(data,
              Strand = c("+", "-"),
              annotation) {
-
         # distance HL between two conditions. log2 is applied after dynamic
         # programming to compare HL with intensity
         data[, "distance_HL_log"] <-
@@ -107,12 +106,12 @@ adjusting_HLToInt <-
             #select fragment by strand
             fragments_HL <-
                 data[which(data$strand == Strand[j]), "HL_comb_fragment"]
-
+            
             #eliminate outliers
             fragments_HL <-
                 unique(fragments_HL[grep(paste0("Dc_\\d+", "$"), fragments_HL)])
             
-            #loop into HL fragments 
+            #loop into HL fragments
             for (i in seq_along(fragments_HL)) {
                 #assign objects
                 fg_hl <- NA
@@ -132,11 +131,12 @@ adjusting_HLToInt <-
                 Description <- NA
                 
                 #selecting strand
-                fg <- data[which(data$strand %in% Strand[j]),]
+                fg <- data[which(data$strand %in% Strand[j]), ]
                 
                 #selecting the positions covering HL_comb fragment
                 fg_hl_pos <-
-                    fg[which(fg$HL_comb_fragment == fragments_HL[i]), "position"]
+                    fg[which(fg$HL_comb_fragment ==
+                                 fragments_HL[i]), "position"]
                 
                 #positions boarders
                 pos.1 <- fg_hl_pos[1]
@@ -150,7 +150,7 @@ adjusting_HLToInt <-
                 
                 #df with the corresponding positions
                 fg_pos <-
-                    fg[between(fg$position, pos.1, pos.2), ]
+                    fg[between(fg$position, pos.1, pos.2),]
                 
                 # select strand on the annotation data frame
                 ann <- as.data.frame(annotation) %>%
@@ -158,19 +158,19 @@ adjusting_HLToInt <-
                 # positions selected to find it on annotation start column
                 positions <- c(pos.1, pos.2)
                 v_start <-
-                    as.numeric(ann$start[order(ann$start, decreasing = F)])
+                    as.numeric(ann$start[order(ann$start, decreasing = FALSE)])
                 interv <-
                     findInterval(positions,
                                  v_start,
-                                 left.open = F,
-                                 rightmost.closed = F)
+                                 left.open = FALSE,
+                                 rightmost.closed = FALSE)
                 
                 tryCatch({
                     region <-
-                        paste0(unique(ann[interv[1]:interv[2], "region"]), 
+                        paste0(unique(ann[interv[1]:interv[2], "region"]),
                                collapse = "|")
                     gene <-
-                        paste0(unique(ann[interv[1]:interv[2], "gene"]), 
+                        paste0(unique(ann[interv[1]:interv[2], "gene"]),
                                collapse = "|")
                     locus_tag <-
                         paste0(unique(ann[interv[1]:interv[2], "locus_tag"]),
@@ -211,7 +211,8 @@ adjusting_HLToInt <-
                         STrand <- c(STrand, Strand[j])
                         
                         #HL fragment
-                        Fragment_HL <- c(Fragment_HL, fragments_HL[i])
+                        Fragment_HL <-
+                            c(Fragment_HL, fragments_HL[i])
                         
                         #int fragment
                         Fragment_int <- c(Fragment_int, f_int[k])
@@ -242,7 +243,7 @@ adjusting_HLToInt <-
                             #mean of the distance on the fragment int
                             Mean_int_fragment <-
                                 c(Mean_int_fragment, fg_int$mean)
-                            # decay_rate is calculated dividing log2/mean(HL) of 
+                            # decay_rate is calculated dividing log2/mean(HL) of
                             # both condition
                             # please refer to calculating_rate function
                             Decay_rate <- c(Decay_rate,
@@ -256,7 +257,7 @@ adjusting_HLToInt <-
                                 )
                             intensity_FC <-
                                 c(intensity_FC, log2(
-                                    mean(hl_int$intensity.cdt1) / 
+                                    mean(hl_int$intensity.cdt1) /
                                         mean(hl_int$intensity.cdt2)
                                 ))
                             # synthesis_rate is calculated from steady-state and
@@ -327,7 +328,9 @@ adjusting_HLToInt <-
                         )
                         intensity_FC <- c(intensity_FC,
                                           log2(
-                                              mean(f_withoutOutlier$intensity.cdt1) / mean(f_withoutOutlier$intensity.cdt2)
+                                              mean(
+                                                  f_withoutOutlier$intensity.cdt1) /
+                                              mean(f_withoutOutlier$intensity.cdt2)
                                           ))
                         if (p_values[1] < .05 | p_values[2] < .05) {
                             p_value <- c(p_value, "*")

@@ -1,8 +1,12 @@
 Package: rifiComparative
-Title: 'rifiComparative' compares the output of rifi_stats from 2 different conditions
-Version: 1.1.0
-Author: Loubna Youssar, Jens Georg
-Maintainer: Jens Georg <jens.georg@biologie.uni-freiburg.de>
+Title: 'rifiComparative' compares the output of rifi from 2 different conditions
+Version: 0.99.0
+Authors@R: c(person("Loubna", "Youssar",
+      email = "lyoussar@gmail.com",
+      role = c("aut", "cre")),
+      person("Jens", "Georg",
+      email = "jens.georg@biologie.uni-freiburg.de",
+      role = "aut", "cre"))
 Description: 'rifiComparative' is a continuation of rifi package. It compares two conditions output of rifi using half-life and mRNA at time 0 segments. As an input for the segmentation, the difference between half-life of both condtions and log2FC of the mRNA at time 0 are used. The segmentation 'rifiComparative' provides segmentation, statistics, summary table, fragments visualization and some additional useful plots for further anaylsis. 
 Depends:
 	R (>= 4.1)
@@ -14,7 +18,7 @@ Imports:
 	egg,
 	foreach,
 	ggplot2,
-	ggrebel,
+	ggrepel,
 	graphics,
 	grDevices,
 	grid,
@@ -29,18 +33,18 @@ Imports:
 	rtracklayer,
 	utils,
 	writexl,
-	ggrepel,
 	DTA,
 	LSD,
 	reshape2,
 	SummarizedExperiment
 Suggests:
 	DescTools,
+	ggrepel,
 	knitr,
 	rmarkdown,
 	BiocStyle
 VignetteBuilder: knitr	
-biocViews: Rifi, RNASeq, DifferentialExpression, GeneRegulation, Transcriptomics, Degradomics, Microarray, Software
+biocViews: RNASeq, DifferentialExpression, GeneRegulation, Transcriptomics, Microarray, Software
 BugReports: https://github.com/CyanolabFreiburg/rifiComparative
 License: GPL-3 + file LICENSE
 Encoding: UTF-8

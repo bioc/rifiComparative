@@ -11,10 +11,10 @@ plot_scatter <- function(data,
         scale_x_continuous(breaks = seq(0, x, by = 2), limits = limits) +
         geom_smooth(
             method = 'lm',
-            se = T,
+            se = TRUE,
             span = .01,
             colour = "yellowgreen",
-            show.legend = T
+            show.legend = TRUE
         ) +
         labs(x = "\nHalf-life in standard conditions [min]",
              y = "Half-life in iron depletion [min]\n") +

@@ -16,50 +16,50 @@ plot_decay_synt <- function(data) {
         ) +
         
         #synthesis rate
-        geom_hline(yintercept = median(na.omit(data$fc_sr)), show.legend = T) +
+        geom_hline(yintercept = median(na.omit(data$fc_sr)), show.legend = TRUE) +
         geom_hline(
             colour = "grey60",
             linetype = "dashed",
             size = 1,
             yintercept = .5,
-            show.legend = T
+            show.legend = TRUE
         ) +
         geom_hline(
             colour = "grey60",
             linetype = "dashed",
             size = 1,
             yintercept = -.5,
-            show.legend = T
+            show.legend = TRUE
         ) +
         geom_hline(colour = "grey60",
                    yintercept = 0,
-                   show.legend = T) +
+                   show.legend = TRUE) +
         
         #decay rate
-        geom_vline(xintercept = median(na.omit(data$fc_dr)), show.legend = T) +
+        geom_vline(xintercept = median(na.omit(data$fc_dr)), show.legend = TRUE) +
         geom_vline(
             colour = "grey80",
             linetype = "dashed",
             size = 1,
             xintercept = -.5,
-            show.legend = T
+            show.legend = TRUE
         ) +
         geom_vline(
             colour = "grey80",
             linetype = "dashed",
             size = 1,
             xintercept = +.5,
-            show.legend = T
+            show.legend = TRUE
         ) +
         geom_vline(colour = "grey80",
                    xintercept = 0,
-                   show.legend = T) +
+                   show.legend = TRUE) +
         
         #mRNA
         geom_abline(
             intercept = 0.7,
             slope = median(na.omit(data$intensity_FC)),
-            show.legend = T
+            show.legend = TRUE
         ) +
         geom_abline(
             colour = "grey70",
@@ -67,7 +67,7 @@ plot_decay_synt <- function(data) {
             size = 1,
             slope = 1,
             intercept = .7,
-            show.legend = T
+            show.legend = TRUE
         ) +
         geom_abline(
             colour = "grey70",
@@ -75,7 +75,7 @@ plot_decay_synt <- function(data) {
             size = 1,
             slope = 1,
             intercept = -.7,
-            show.legend = T
+            show.legend = TRUE
         ) +
         geom_abline(colour = "grey70", slope = 1) +
         
