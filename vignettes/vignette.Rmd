@@ -172,17 +172,7 @@ df_comb_minimal[,"distance_HL"] <-
 pen_HL <- make_pen(
     probe = df_comb_minimal,
     FUN = rifiComparative:::fragment_HL_pen,
-    cores = 2,
-    logs = as.numeric(rep(NA, 8)),
-    dpt = 1,
-    smpl_min = 10,
-    smpl_max = 50,
-    sta_pen = 0.5,
-    end_pen = 4.5,
-    rez_pen = 9,
-    sta_pen_out = 0.5,
-    end_pen_out = 3.5,
-    rez_pen_out = 7
+    cores = 2
 )
 ```
 <br/><br/>
@@ -200,17 +190,7 @@ df_comb_minimal[,"distance_int"] <- df_comb_minimal[,"logFC_int"]
 pen_int <- make_pen(
     probe = df_comb_minimal,
     FUN = rifiComparative:::fragment_inty_pen,
-    cores = 60,
-    logs = as.numeric(rep(NA, 8)),
-    dpt = 1,
-    smpl_min = 10,
-    smpl_max = 50,
-    sta_pen = 0.5,
-    end_pen = 4.5,
-    rez_pen = 9,
-    sta_pen_out = 0.5,
-    end_pen_out = 3.5,
-    rez_pen_out = 7
+    cores = 2
 )
 ```
 <br/><br/>
