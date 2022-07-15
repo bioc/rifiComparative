@@ -100,4 +100,4 @@ install_github('rifiComparative')
 
 # Troubleshooting
 
-contact [lyoussar\@gmail.com](mailto:lyoussar@gmail.com) or create an issue
+contact [jens.georg\@biologie.uni-freiburg.de](mailto:jens.georg@biologie.uni-freiburg.de) or create an issue
