@@ -2,8 +2,8 @@
 % Please edit documentation in R/adjusting_HLToInt.r
 \name{adjusting_HLToInt}
 \alias{adjusting_HLToInt}
-\title{'adjusting_HLToInt': merges HL and intensity fragments with genome
-annotation.}
+\title{adjusting_HLToInt Creates one table merging HL and intensity fragments
+with genome annotation}
 \usage{
 adjusting_HLToInt(data, Strand = c("+", "-"), annotation)
 }
@@ -15,6 +15,7 @@ adjusting_HLToInt(data, Strand = c("+", "-"), annotation)
 \item{annotation}{data frame: data frame from processed gff3 file.}
 }
 \value{
+The data frame with the corresponding columns:
 \describe{
 \item{position:}{Integer, position of the first fragment}
 \item{region:}{String, region annotation covering the fragments}
@@ -69,6 +70,6 @@ used to calculate synthesis rate.
 \examples{
 data(stats_df_comb_minimal)
 data(annot_g)
-df_adjusting_HLToInt <- adjusting_HLToInt(data = stats_df_comb_minimal,
+df_mean_minimal <- adjusting_HLToInt(data = stats_df_comb_minimal,
 annotation = annot_g[[1]])
 }

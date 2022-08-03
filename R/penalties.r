@@ -1,23 +1,29 @@
 # =========================================================================
-#  penalties           Conveniently wraps all penalty steps
+#  penalties           
 # -------------------------------------------------------------------------
-#' 'penalties': find the best set of penalties for half-life and intensity
-#' fragmentation
-#' 'penalties' find the best set of penalties for half-life and intensity
+#' penalties wraps conveniently all penalty steps
+#' 
+#' penalties finds the best set of penalties for half-life and intensity
 #' fragmentation using dynamic programming. The segmentation of the HL uses the
 #' difference between 2 conditions and the segmentation of the intensity uses 
-#' the log2FC. The function uses 4 functions:
+#' the log2FC. 
+#' 
+#' The function uses 4 functions: 
 #' 
 #' score_fun_ave.r
+#' 
 #' make_pen.r
+#' 
 #' fragment_HL_pen.r
+#' 
 #' fragment_inty_pen.r
 #'
 #' @param data data frame with the joined columns from differential 
 #' expression and output of rifi_stats.
-#' @param cores integer: the number of assigned cores for the task.
+#' @param cores integer: the number of assigned cores for the task. It needs to 
+#' be increased in case of big data.
 #' 
-#' @return a list of data frame and penalties, The first element is data frame
+#' @return A list of data frame and penalties, The first element is data frame
 #' with 2 more variables, second and third are HL and intensity penalties
 #' respectively.
 #'

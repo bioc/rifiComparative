@@ -46,9 +46,11 @@ respective TI fragment}
 \item{delay_frg_slope:}{the slope value of the respective delay fragment}
 \item{velocity_ratio:}{Integer, ratio of velocity between 2 delay fragments}
 \item{event_duration:}{Integer, the duration between two delay fragments}
-\item{event_position:}{Integer, the position middle between 2 fragments with an event}
+\item{event_position:}{Integer, the position middle between 2 fragments
+with an event}
 \item{FC_HL:}{Integer, the fold change value of 2 HL fragments}
-\item{FC_fragment_HL:}{Integer, the fold change value of 2 intensity fragments}
+\item{FC_fragment_HL:}{Integer, the fold change value of 2 intensity
+fragments}
 \item{p_value_HL:}{p_value of the fold change of HL fragments}
 \item{FC_intensity:}{Integer, the fold change value of 2 intensity fragments}
 \item{FC_fragment_intensity:}{String, fragments involved in fold change

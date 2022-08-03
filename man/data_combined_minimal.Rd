@@ -47,7 +47,8 @@ respective TI fragment}
 \item{event_duration:}{Integer, the duration between two delay fragments}
 \item{event_position:}{Integer, the position middle between 2 fragments
 with an event}
-\item{FC_fragment_HL:}{Integer, the fold change value of 2 intensity fragments}
+\item{FC_fragment_HL:}{Integer, the fold change value of 2 intensity
+fragments}
 \item{FC_HL:}{Integer, the fold change value of 2 HL fragments}#'
 \item{p_value_HL:}{p_value of the fold change of HL fragments}
 \item{FC_intensity:}{Integer, the fold change value of 2 intensity

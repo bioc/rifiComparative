@@ -1,18 +1,14 @@
 # ==============================================================================
-# rifi_visualization_comparison      Plots half-life, intensity segments and 
-#                                               genome annotation
+# rifi_visualization_comparison      
 # ------------------------------------------------------------------------------
 # 
-#' rifi_visualization_comparison: plots HL and intensity fragments
+#' rifi_visualization_comparison plots the segments and genome annotation
+#' 
 #' rifi_visualization_comparison: plots the whole genome with genes, locus_tags,
-#' half-life difference (HL), log2FC(intensity) fragments.
-#' 
-#' rifi_visualization_comparison uses several functions to plot TUs and genes
-#' including small-RNAs.
-#' 
-#' The function plots HL and intensity fragments with statistical t-test
-#' between the neighboring fragment, significant p-value from t-test is assigned
-#' with '*'.
+#' half-life difference (HL), log2FC(intensity) fragments. It uses several
+#' functions to plot TUs and genes including small-RNAs. Additionally it plots 
+#' the statistical t-test between the neighboring fragment, significant p-values
+#' from t-test are assigned with '*'.
 #' 
 #' The functions used are:
 #' 
@@ -50,8 +46,8 @@
 #'
 #' @param data dataframe: the probe based dataframe with joined columns.
 #' @param data_c dataframe: the probe based dataframe with joined rows.
-#' @param condition string: assigned as cdt1 (condition 1) and cdt2 (condition2), 
-#' it could be changed.
+#' @param condition string: assigned as cdt1 (condition 1) and cdt2 
+#' (condition2), it could be adapted to any name.
 #' @param Strand string: either ("+" or "-").
 #' @param scaling_TU vector: values to adjusted termination and iTSSs to TUs.
 #' @param iTSS_threshold integer: threshold for iTSS_II selected to plot,
@@ -85,7 +81,7 @@
 #' @param p_value_manova integer: p_value of manova test fragments to plot,
 #' default 0.05.
 #'
-#' @return The visualization.
+#' @return The plot.
 #'
 #' @examples
 #' data(data_combined_minimal)
@@ -164,7 +160,7 @@ rifi_visualization_comparison <-
             height = 5.3
         )
         pdf("genome_fragments_comparison.pdf")
-        suppressWarnings(for (i in seq_len(length(frag) - 1)) {
+        suppressWarnings(message(for (i in seq_len(length(frag) - 1)) {
             p <- list()
             p.1 <- list()
             print(i)
@@ -295,7 +291,7 @@ rifi_visualization_comparison <-
                 nrow = 5,
                 heights = c(5, 5, 6, 5, 5)
             )
-        })
+        }))
         dev.off()
     }
 

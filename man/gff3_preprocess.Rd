@@ -2,11 +2,7 @@
 % Please edit documentation in R/gff3_preprocess.r
 \name{gff3_preprocess}
 \alias{gff3_preprocess}
-\title{gff3_preprocess processes the gff3 file extracting gene names and locus_tag
-from all coding regions (CDS), UTRs/ncRNA/asRNA are also extracted if
-available.
-The resulting dataframe contains region, positions, strand, gene and
-locus_tag.}
+\title{gff3_preprocess processes gff3 file from database}
 \usage{
 gff3_preprocess(path)
 }
@@ -24,20 +20,21 @@ A list with 2 items:
 \item{strand:}{Boolean, the strand of the annotation}
 \item{gene:}{String, the annotated gene name}
 \item{locus_tag:}{String, the annotated locus tag}
+\item{genome length:}{a numeric vector containing the length of the
+genome}
 }
 }
-\item{genome length:}{a numeric vector containing the length of the genome}
 }
 }
 \description{
 gff3_preprocess processes the gff3 file extracting gene names and locus_tag
-from all coding regions (CDS), UTRs/ncRNA/asRNA are also extracted if
-available.
-The resulting dataframe contains region, positions, strand, gene and
-locus_tag.
+from all coding regions (CDS). UTRs/ncRNA/asRNA if available, are also
+extracted. The resulting dataframe contains region, positions, strand, gene
+and locus_tag.
 }
 \examples{
 gff3_preprocess(
-path = gzfile(system.file("extdata", "gff_synechocystis_6803.gff.gz", package = "rifiComparative"))
+path = gzfile(system.file("extdata", "gff_synechocystis_6803.gff.gz", 
+package = "rifiComparative"))
 )
 }

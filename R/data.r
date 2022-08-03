@@ -234,7 +234,8 @@
 #'   \item{FC_HL_adapted:}{Integer, the fold change of half-life/ fold change of
 #'   intensity, position of the half-life fragment is adapted to intensity fragment}
 #'   \item{synthesis_ratio:}{Integer, the value correspomding to synthesis rate}
-#'   \item{synthesis_ratio_event:}{String, the event assigned by synthesis rate either  Termination or iTSS}
+#'   \item{synthesis_ratio_event:}{String, the event assigned by synthesis rate 
+#'   either  Termination or iTSS}
 #'   \item{p_value_Manova:}{p_value of the variance between two fold-changes, 
 #'   HL and intensity}
 #'   \item{p_value_TI:}{p_value of TI fragment}
@@ -295,9 +296,11 @@
 #'   \item{delay_frg_slope:}{the slope value of the respective delay fragment}
 #'   \item{velocity_ratio:}{Integer, ratio of velocity between 2 delay fragments}
 #'   \item{event_duration:}{Integer, the duration between two delay fragments}
-#'   \item{event_position:}{Integer, the position middle between 2 fragments with an event}
+#'   \item{event_position:}{Integer, the position middle between 2 fragments 
+#'   with an event}
 #'   \item{FC_HL:}{Integer, the fold change value of 2 HL fragments}
-#'   \item{FC_fragment_HL:}{Integer, the fold change value of 2 intensity fragments}
+#'   \item{FC_fragment_HL:}{Integer, the fold change value of 2 intensity 
+#'   fragments}
 #'   \item{p_value_HL:}{p_value of the fold change of HL fragments}
 #'   \item{FC_intensity:}{Integer, the fold change value of 2 intensity fragments}
 #'   \item{FC_fragment_intensity:}{String, fragments involved in fold change 
@@ -375,7 +378,8 @@
 #'   \item{event_duration:}{Integer, the duration between two delay fragments}
 #'   \item{event_position:}{Integer, the position middle between 2 fragments 
 #'   with an event}
-#'   \item{FC_fragment_HL:}{Integer, the fold change value of 2 intensity fragments}
+#'   \item{FC_fragment_HL:}{Integer, the fold change value of 2 intensity 
+#'   fragments}
 #'   \item{FC_HL:}{Integer, the fold change value of 2 HL fragments}#'   
 #'   \item{p_value_HL:}{p_value of the fold change of HL fragments}
 #'   \item{FC_intensity:}{Integer, the fold change value of 2 intensity 

@@ -2,28 +2,7 @@
 % Please edit documentation in R/make_pen.r
 \name{make_pen}
 \alias{make_pen}
-\title{'make_pen: automatically assigns a penalties.
-'make_pen' calls one of four available penalty functions to automatically
-assign penalties for the dynamic programming.
-The two functions to be called are:
-\enumerate{
-\item fragment_HL_pen
-\item fragment_inty_pen
-These functions return the amount of statistically correct and statistically
-wrong splits at a specific pair of penalties.
-'make_pen' iterates over many penalty pairs and picks the most suitable pair
-based on the difference between wrong and correct splits.
-The sample size, penalty range and resolution as well as the number of cycles
-can be customized.
-The primary start parameters create a matrix with n = rez_pen rows and
-n = rez_pen_out columns with values between sta_pen/sta_pen_out
-and end_pen/end_pen_out. The best penalty pair is picked. If dept is bigger
-than 1 the same process is repeated with a new matrix of the same size
-based on the result of the previous cycle. Only position segments with length
-within the sample size range are considered for the penalties to increase
-run time.
-Returns a penalty object including the logbook.
-}}
+\title{make_pen assigns automatically penalties}
 \usage{
 make_pen(
   probe,
@@ -51,7 +30,7 @@ make_pen(
 \item{logs}{numeric vector: the logbook vector.}
 
 \item{dpt}{integer: the number of times a full iteration cycle is repeated
-with a more narrow range based on the previous cycle. Default is 2.}
+with a more narrow range based on the previous cycle. Default is 1.}
 
 \item{smpl_min}{integer: the smaller end of the sampling size. Default is 10.}
 
@@ -77,22 +56,24 @@ the outlier penalty range. Default is 7.}
 A list with 4 items:
 \describe{
 \item{logbook:}{The logbook vector containing all penalty information}
-\item{penalties:}{a vetor with the respective penalty and outlier
+\item{penalties:}{a vector with the respective penalty and outlier
 penalty}
 \item{correct:}{a matrix of the correct splits}
 \item{wrong:}{a matrix of the incorrect splits}
 }
 }
 \description{
-'make_pen: automatically assigns a penalties.
-'make_pen' calls one of four available penalty functions to automatically
+make_pen calls one of four available penalty functions to automatically
 assign penalties for the dynamic programming.
 The two functions to be called are:
 \enumerate{
 \item fragment_HL_pen
 \item fragment_inty_pen
-These functions return the amount of statistically correct and statistically
-wrong splits at a specific pair of penalties.
+}
+}
+\details{
+The two functions called return the amount of statistically correct and
+statistically wrong splits at a specific pair of penalties.
 'make_pen' iterates over many penalty pairs and picks the most suitable pair
 based on the difference between wrong and correct splits.
 The sample size, penalty range and resolution as well as the number of cycles
@@ -104,8 +85,6 @@ than 1 the same process is repeated with a new matrix of the same size
 based on the result of the previous cycle. Only position segments with length
 within the sample size range are considered for the penalties to increase
 run time.
-Returns a penalty object including the logbook.
-}
 }
 \examples{
 data(df_comb_minimal)

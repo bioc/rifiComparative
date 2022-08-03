@@ -6,7 +6,7 @@ empty_data_negative <- function(data_n,
                                 axis_title_y_size = axis_title_y_size,
                                 axis_text_y_size = axis_text_y_size,
                                 Limit = Limit) {
-  print(paste0(i, ": no data on negative strand"))
+  message(paste0(i, ": no data on negative strand"))
   df2_f <- data.frame(matrix(NA, nrow = 1, ncol = ncol(data_n)))
   colnames(df2_f) <- colnames(data_n)
   df2_f$ID <- "ID_fake"

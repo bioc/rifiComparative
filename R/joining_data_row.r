@@ -1,15 +1,16 @@
 # =========================================================================
-#  joining_data_row           Joining two data frames by row
+#  joining_data_row           
 # -------------------------------------------------------------------------
+#' joining_data_row joins two data frames by row
 #' 
-#' 'joining_data_row': joins two data frames from different conditions by row
+#' joining_data_row joins two data frames from different conditions by row.
 #'
 #' @param input1 data frame from SummarizedExperiment output of rifi_stats 
 #' from rifi package of the first condition. 
 #' @param input2 data frame from SummarizedExperiment output of rifi_stats 
 #' from rifi package of the second condition.
 #'
-#' @return the data frame with joined rows from both conditions with the 
+#' @return The data frame with joined rows from both conditions with the 
 #' corresponding columns: ID with position, strand, intensity, probe_TI, flag, 
 #' position_segment, delay, half_life, TI_termination_factor, delay_fragment, 
 #' velocity_fragment, intercept, slope, HL_fragment, HL_mean_fragment, 

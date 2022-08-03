@@ -1,14 +1,16 @@
 # =========================================================================
-#  Make_pen                   Penalty assignment
+#  make_pen                   
 # -------------------------------------------------------------------------
-#' 'make_pen: automatically assigns a penalties.
-#' 'make_pen' calls one of four available penalty functions to automatically
+#' make_pen assigns automatically penalties
+#'
+#' make_pen calls one of four available penalty functions to automatically
 #' assign penalties for the dynamic programming.
-#' The two functions to be called are:
+#' The two functions to be called are:  
 #' 1. fragment_HL_pen
-#' 2. fragment_inty_pen
-#' These functions return the amount of statistically correct and statistically
-#' wrong splits at a specific pair of penalties.
+#' 2. fragment_inty_pen 
+#' 
+#' The two functions called return the amount of statistically correct and
+#' statistically wrong splits at a specific pair of penalties.
 #' 'make_pen' iterates over many penalty pairs and picks the most suitable pair
 #' based on the difference between wrong and correct splits.
 #' The sample size, penalty range and resolution as well as the number of cycles
@@ -20,14 +22,14 @@
 #' based on the result of the previous cycle. Only position segments with length
 #' within the sample size range are considered for the penalties to increase
 #' run time.
-#' Returns a penalty object including the logbook.
+#' 
 #'
 #' @param probe data frame: data frame combined data by column
 #' @param FUN function: one of the four bottom level functions (see details)
 #' @param cores integer: the number of assigned cores for the task
 #' @param logs numeric vector: the logbook vector.
 #' @param dpt integer: the number of times a full iteration cycle is repeated
-#' with a more narrow range based on the previous cycle. Default is 2.
+#' with a more narrow range based on the previous cycle. Default is 1.
 #' @param smpl_min integer: the smaller end of the sampling size. Default is 10.
 #' @param smpl_max integer: the larger end of the sampling size. Default is 100.
 #' @param sta_pen numeric: the lower starting penalty. Default is 0.5.
@@ -44,7 +46,7 @@
 #' @return A list with 4 items:
 #'     \describe{
 #'       \item{logbook:}{The logbook vector containing all penalty information}
-#'       \item{penalties:}{a vetor with the respective penalty and outlier
+#'       \item{penalties:}{a vector with the respective penalty and outlier
 #'       penalty}
 #'       \item{correct:}{a matrix of the correct splits}
 #'       \item{wrong:}{a matrix of the incorrect splits}

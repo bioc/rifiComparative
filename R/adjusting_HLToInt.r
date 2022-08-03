@@ -1,13 +1,13 @@
 # =========================================================================
-# adjusting_HLToInt  Creates one table merging HL and intensity fragments with
-#                                   genome annotation
+# adjusting_HLToInt  
 # -------------------------------------------------------------------------
-#' 'adjusting_HLToInt': merges HL and intensity fragments with genome
-#' annotation.
+#' adjusting_HLToInt Creates one table merging HL and intensity fragments
+#' with genome annotation
 #'
-#' 'adjusting_HLToInt' merges HL and intensity segments adapting the positions
+#'
+#' 'adjusting_HLToInt' merges HL and intensity segments adapting the positions 
 #' to each other and combining with genome annotation.
-#' To make HL and intensity segments comparable, log2FC(HL) is used to generate
+#' To make HL and intensity segments comparable, log2FC(HL) is used to generate 
 #' the data frame instead of distance.
 #' The fragments should have a significant p_value from t-test at least from one
 #' segmentation, either HL or intensity.
@@ -34,7 +34,7 @@
 #' @param Strand string: either "+" or "-"
 #' @param annotation data frame: data frame from processed gff3 file.
 #'
-#' @return
+#' @return The data frame with the corresponding columns:
 #'    \describe{
 #'      \item{position:}{Integer, position of the first fragment}
 #'      \item{region:}{String, region annotation covering the fragments}
@@ -66,7 +66,7 @@
 #' @examples
 #' data(stats_df_comb_minimal)
 #' data(annot_g)
-#' df_adjusting_HLToInt <- adjusting_HLToInt(data = stats_df_comb_minimal,
+#' df_mean_minimal <- adjusting_HLToInt(data = stats_df_comb_minimal,
 #' annotation = annot_g[[1]])
 #' @export
 
@@ -155,26 +155,43 @@ adjusting_HLToInt <-
                 # select strand on the annotation data frame
                 ann <- as.data.frame(annotation) %>%
                     filter(strand == Strand[j])
-                # positions selected to find it on annotation start column
-                positions <- c(pos.1, pos.2)
-                v_start <-
-                    as.numeric(ann$start[order(ann$start, decreasing = FALSE)])
-                interv <-
-                    findInterval(positions,
-                                 v_start,
-                                 left.open = FALSE,
-                                 rightmost.closed = FALSE)
-                
+
                 tryCatch({
-                    region <-
-                        paste0(unique(ann[interv[1]:interv[2], "region"]),
-                               collapse = "|")
-                    gene <-
-                        paste0(unique(ann[interv[1]:interv[2], "gene"]),
-                               collapse = "|")
+                    region <-  
+                        paste0(annotation_function_df(
+                            feature = "region",
+                            pos.1 = pos.1, 
+                            pos.2 = pos.2,
+                            strand = Strand[j],
+                            data_annotation = ann
+                        ), collapse = "|")
+                    
+                    gene <- 
+                        paste0(annotation_function_df(
+                            feature = "gene",
+                            pos.1 = pos.1, 
+                            pos.2 = pos.2,
+                            strand = Strand[j],
+                            data_annotation = ann
+                        ), collapse = "|")
+                    
                     locus_tag <-
-                        paste0(unique(ann[interv[1]:interv[2], "locus_tag"]),
-                               collapse = "|")
+                        paste0(annotation_function_df(
+                            feature = "locus_tag",
+                            pos.1 = pos.1, 
+                            pos.2 = pos.2,
+                            strand = Strand[j],
+                            data_annotation = ann
+                        ), collapse = "|")
+                    
+                    Description <-
+                        paste0(annotation_function_df(
+                            feature = "Annotation",
+                            pos.1 = pos.1, 
+                            pos.2 = pos.2,
+                            strand = Strand[j],
+                            data_annotation = ann
+                        ), collapse = "|")
                 }, error = function(e) {
                     "No match for the annotation"
                 })

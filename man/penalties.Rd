@@ -2,12 +2,7 @@
 % Please edit documentation in R/penalties.r
 \name{penalties}
 \alias{penalties}
-\title{'penalties': find the best set of penalties for half-life and intensity
-fragmentation
-'penalties' find the best set of penalties for half-life and intensity
-fragmentation using dynamic programming. The segmentation of the HL uses the
-difference between 2 conditions and the segmentation of the intensity uses
-the log2FC. The function uses 4 functions:}
+\title{penalties wraps conveniently all penalty steps}
 \usage{
 penalties(data, cores = 2)
 }
@@ -15,17 +10,29 @@ penalties(data, cores = 2)
 \item{data}{data frame with the joined columns from differential
 expression and output of rifi_stats.}
 
-\item{cores}{integer: the number of assigned cores for the task.}
+\item{cores}{integer: the number of assigned cores for the task. It needs to
+be increased in case of big data.}
 }
 \value{
-a list of data frame and penalties, The first element is data frame
+A list of data frame and penalties, The first element is data frame
 with 2 more variables, second and third are HL and intensity penalties
 respectively.
 }
 \description{
+penalties finds the best set of penalties for half-life and intensity
+fragmentation using dynamic programming. The segmentation of the HL uses the
+difference between 2 conditions and the segmentation of the intensity uses
+the log2FC.
+}
+\details{
+The function uses 4 functions:
+
 score_fun_ave.r
+
 make_pen.r
+
 fragment_HL_pen.r
+
 fragment_inty_pen.r
 }
 \examples{

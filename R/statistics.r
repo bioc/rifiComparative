@@ -1,15 +1,16 @@
 # ==============================================================================
-# statistics                Statistical prediction between 2 segments
+# statistics                
 # ------------------------------------------------------------------------------
 # 
-# 'statistics': check segment significance using t-test 
-#' 'statistics' uses t-test to check HL and intensity segments significance. The 
-#' function return the data frame with p_value p_value adjusted. 
+#' statistics check segments significance using statistical test
+#' 
+#' statistics uses t-test to check HL and intensity segments significance. The 
+#' function returns the data frame with p_value p_value adjusted. 
 #' The function used is t_test_function.
 #'
 #' @param data data frame: data frame output of fragmentation
 #' 
-#' @return a list of two data frames, the first one contains all segments with 
+#' @return A list of two data frames, the first one contains all segments with 
 #' p_value and p_value adjusted. The second one removes the duplicated segments 
 #' from intensity and could be saved as an excel file. 
 #'

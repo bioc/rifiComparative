@@ -62,7 +62,8 @@ fragments}
 \item{FC_HL_adapted:}{Integer, the fold change of half-life/ fold change of
 intensity, position of the half-life fragment is adapted to intensity fragment}
 \item{synthesis_ratio:}{Integer, the value correspomding to synthesis rate}
-\item{synthesis_ratio_event:}{String, the event assigned by synthesis rate either  Termination or iTSS}
+\item{synthesis_ratio_event:}{String, the event assigned by synthesis rate
+either  Termination or iTSS}
 \item{p_value_Manova:}{p_value of the variance between two fold-changes,
 HL and intensity}
 \item{p_value_TI:}{p_value of TI fragment}

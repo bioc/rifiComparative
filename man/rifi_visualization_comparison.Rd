@@ -2,9 +2,7 @@
 % Please edit documentation in R/rifi_visualization_comparison.r
 \name{rifi_visualization_comparison}
 \alias{rifi_visualization_comparison}
-\title{rifi_visualization_comparison: plots HL and intensity fragments
-rifi_visualization_comparison: plots the whole genome with genes, locus_tags,
-half-life difference (HL), log2FC(intensity) fragments.}
+\title{rifi_visualization_comparison plots the segments and genome annotation}
 \usage{
 rifi_visualization_comparison(
   data,
@@ -49,8 +47,8 @@ function.}
 
 \item{annot}{dataframe: the annotation file.}
 
-\item{condition}{string: assigned as cdt1 (condition 1) and cdt2 (condition2),
-it could be changed.}
+\item{condition}{string: assigned as cdt1 (condition 1) and cdt2
+(condition2), it could be adapted to any name.}
 
 \item{Strand}{string: either ("+" or "-").}
 
@@ -104,17 +102,16 @@ default 0.05.}
 default .8.}
 }
 \value{
-The visualization.
+The plot.
 }
 \description{
-rifi_visualization_comparison uses several functions to plot TUs and genes
-including small-RNAs.
+rifi_visualization_comparison: plots the whole genome with genes, locus_tags,
+half-life difference (HL), log2FC(intensity) fragments. It uses several
+functions to plot TUs and genes including small-RNAs. Additionally it plots
+the statistical t-test between the neighboring fragment, significant p-values
+from t-test are assigned with '*'.
 }
 \details{
-The function plots HL and intensity fragments with statistical t-test
-between the neighboring fragment, significant p-value from t-test is assigned
-with '*'.
-
 The functions used are:
 
 strand_selection: plots HL, intensity fragments from both strands.

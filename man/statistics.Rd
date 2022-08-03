@@ -2,9 +2,7 @@
 % Please edit documentation in R/statistics.r
 \name{statistics}
 \alias{statistics}
-\title{'statistics' uses t-test to check HL and intensity segments significance. The
-function return the data frame with p_value p_value adjusted.
-The function used is t_test_function.}
+\title{statistics check segments significance using statistical test}
 \usage{
 statistics(data)
 }
@@ -12,13 +10,13 @@ statistics(data)
 \item{data}{data frame: data frame output of fragmentation}
 }
 \value{
-a list of two data frames, the first one contains all segments with
+A list of two data frames, the first one contains all segments with
 p_value and p_value adjusted. The second one removes the duplicated segments
 from intensity and could be saved as an excel file.
 }
 \description{
-'statistics' uses t-test to check HL and intensity segments significance. The
-function return the data frame with p_value p_value adjusted.
+statistics uses t-test to check HL and intensity segments significance. The
+function returns the data frame with p_value p_value adjusted.
 The function used is t_test_function.
 }
 \examples{

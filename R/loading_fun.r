@@ -1,10 +1,11 @@
 # =========================================================================
-# loading_fun           Loading the data of all conditions
+# loading_fun           
 # -------------------------------------------------------------------------
-#''loading_fun': extract outputs from rifi_stats of all conditions and join
-#' each data to the differential expression table.
-#' 'loading_fun' extract the object of rifi_statistics from both conditions. The
-#' differential gene expression at time 0 needs to be run separately.
+#' loading_fun loads the data of all conditions
+#'
+#' loading_fun extract outputs from rifi_stats of all conditions and join
+#' each data to the differential expression table. The differential gene
+#' expression at time 0 needs to be run separately.
 #' The columns log2FC, p_value adjusted, position and strand are extracted and
 #' saved to a data frame. loading_fun joins the differential gene expression
 #' table and the output from rifi statistics into one data frame.
@@ -13,7 +14,7 @@
 #' @param data2 data frame from rifi_stats of other condition
 #' @param data3 data frame from differential gene expression at time 0
 #'
-#' @return a list of two data frames with joined columns from differential
+#' @return A list of two data frames with joined columns from differential
 #' expression and output of rifi_stats with the corresponding columns: ID with
 #' position, strand, intensity, probe_TI, flag, position_segment, delay,
 #' half_life, TI_termination_factor, delay_fragment, velocity_fragment,

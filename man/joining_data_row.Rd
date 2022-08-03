@@ -2,7 +2,7 @@
 % Please edit documentation in R/joining_data_row.r
 \name{joining_data_row}
 \alias{joining_data_row}
-\title{'joining_data_row': joins two data frames from different conditions by row}
+\title{joining_data_row joins two data frames by row}
 \usage{
 joining_data_row(input1, input2)
 }
@@ -14,7 +14,7 @@ from rifi package of the first condition.}
 from rifi package of the second condition.}
 }
 \value{
-the data frame with joined rows from both conditions with the
+The data frame with joined rows from both conditions with the
 corresponding columns: ID with position, strand, intensity, probe_TI, flag,
 position_segment, delay, half_life, TI_termination_factor, delay_fragment,
 velocity_fragment, intercept, slope, HL_fragment, HL_mean_fragment,
@@ -28,7 +28,7 @@ synthesis_ratio_event, p_value_Manova, p_value_TI, cdt (condition),
 logFC_int (log2FC(intensity)), P.Value of log2FC(intensity)
 }
 \description{
-'joining_data_row': joins two data frames from different conditions by row
+joining_data_row joins two data frames from different conditions by row.
 }
 \examples{
 data(inp_s)

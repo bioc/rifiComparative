@@ -2,10 +2,7 @@
 % Please edit documentation in R/figures_fun.r
 \name{figures_fun}
 \alias{figures_fun}
-\title{'figures_fun': generates several plots from three outputs.
-'figures_fun' plots at one the density of HL, the HL category as histogram,
-log2FC of decay and synthesis rate and their heatscatter. Scatter plot of HL
-and volcano plot.}
+\title{'figures_fun': generates several plots}
 \usage{
 figures_fun(
   data.1,
@@ -42,15 +39,28 @@ figures_fun(
 several plots
 }
 \description{
-The functions used are:
+'figures_fun' plots at one the density of HL, the HL category as histogram,
+log2FC of decay and synthesis rate and their heatscatter. Scatter plot of HL
+and volcano plot. The function uses the four output generated previously.
 }
 \details{
-plot_decay_synt
-plot_heatscatter
-plot_volcano
-plot_histogram
-plot_density
-plot_scatter
+The functions used are:
+
+plot_decay_synt: plots the changes in RNA decay rates versus the changes
+in RNA synthesis rates
+
+plot_heatscatter: plots the changes in RNA decay rates versus the changes
+in RNA synthesis rates with density.
+
+plot_volcano: plots statistical significance  versus magnitude of change .
+
+plot_histogram: plot a histogram of probe/bin half-life categories from
+2 to 20 minutes in both conditions.
+
+plot_density: plots the probe/bin half-life density in both conditions.
+
+plot_scatter: plots of the bin/probe half-life in one condition1 vs.
+condition2.
 
 extract the object of rifi_statistics from both conditions.
 The differential gene expression at time 0 needs to be run separately.

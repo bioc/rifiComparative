@@ -2,13 +2,7 @@
 % Please edit documentation in R/loading_fun.r
 \name{loading_fun}
 \alias{loading_fun}
-\title{'loading_fun': extract outputs from rifi_stats of all conditions and join
-each data to the differential expression table.
-'loading_fun' extract the object of rifi_statistics from both conditions. The
-differential gene expression at time 0 needs to be run separately.
-The columns log2FC, p_value adjusted, position and strand are extracted and
-saved to a data frame. loading_fun joins the differential gene expression
-table and the output from rifi statistics into one data frame.}
+\title{loading_fun loads the data of all conditions}
 \usage{
 loading_fun(data1, data2, data3)
 }
@@ -20,7 +14,7 @@ loading_fun(data1, data2, data3)
 \item{data3}{data frame from differential gene expression at time 0}
 }
 \value{
-a list of two data frames with joined columns from differential
+A list of two data frames with joined columns from differential
 expression and output of rifi_stats with the corresponding columns: ID with
 position, strand, intensity, probe_TI, flag, position_segment, delay,
 half_life, TI_termination_factor, delay_fragment, velocity_fragment,
@@ -35,10 +29,9 @@ synthesis_ratio_event, p_value_Manova, p_value_TI, cdt (condition),
 logFC_int (log2FC(intensity)), P.Value of log2FC(intensity).
 }
 \description{
-'loading_fun': extract outputs from rifi_stats of all conditions and join
-each data to the differential expression table.
-'loading_fun' extract the object of rifi_statistics from both conditions. The
-differential gene expression at time 0 needs to be run separately.
+loading_fun extract outputs from rifi_stats of all conditions and join
+each data to the differential expression table. The differential gene
+expression at time 0 needs to be run separately.
 The columns log2FC, p_value adjusted, position and strand are extracted and
 saved to a data frame. loading_fun joins the differential gene expression
 table and the output from rifi statistics into one data frame.
