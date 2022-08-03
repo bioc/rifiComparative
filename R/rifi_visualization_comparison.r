@@ -4,10 +4,10 @@
 # 
 #' rifi_visualization_comparison plots the segments and genome annotation
 #' 
-#' rifi_visualization_comparison: plots the whole genome with genes, locus_tags,
-#' half-life difference (HL), log2FC(intensity) fragments. It uses several
-#' functions to plot TUs and genes including small-RNAs. Additionally it plots 
-#' the statistical t-test between the neighboring fragment, significant p-values
+#' rifi_visualization_comparison plots the genome annotation, half-life 
+#' difference (HL), log2FC(intensity) fragments. It uses several functions to
+#' plot TUs and genes including small-RNAs. Additionally it plots the
+#' statistical t-test between the neighboring fragment, significant p-values
 #' from t-test are assigned with '*'.
 #' 
 #' The functions used are:

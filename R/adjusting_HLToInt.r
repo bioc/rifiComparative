@@ -6,7 +6,7 @@
 #'
 #'
 #' 'adjusting_HLToInt' merges HL and intensity segments adapting the positions 
-#' to each other and combining with genome annotation.
+#' to each other and combining to the genome annotation.
 #' To make HL and intensity segments comparable, log2FC(HL) is used to generate 
 #' the data frame instead of distance.
 #' The fragments should have a significant p_value from t-test at least from one

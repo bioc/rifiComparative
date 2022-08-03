@@ -2,7 +2,7 @@
 % Please edit documentation in R/fragmentation.r
 \name{fragmentation}
 \alias{fragmentation}
-\title{'fragmentation': Conveniently wraps all fragmentation steps}
+\title{fragmentation: Conveniently wraps all fragmentation steps}
 \usage{
 fragmentation(data, pen_HL, pen_int, cores = 2)
 }
@@ -23,7 +23,7 @@ Two data frames with half-life and intensity fragments and the mean
 of the coefficient fragment based.
 }
 \description{
-'fragmentation': fragments the half-life and intensity into segments using
+fragmentation fragments the half-life and intensity into segments using
 the penalties output.
 }
 \examples{

@@ -1,0 +1,65 @@
+# =========================================================================
+# rifiComparative  
+# -------------------------------------------------------------------------
+#' rifiComparative compares the output of rifi from 2 different conditions 
+#'
+#'
+#' 'rifiComparative' applies a new segmentation based on difference of half-life
+#' and differential expression from iron stress and Sc at probe level. The
+#' segmentation uses the same principle as rifi which is based on a dynamic
+#' programming algorithm assembling probes with the same behavior. However and
+#' contrary to rifi, the segmentation does not follow any hierarchy. The 
+#' segments were adjusted mutually from half-life and intensity leading to a 
+#' logical and simple comparison.  
+#' 
+#' 
+#'
+#' The functions used are:
+#'
+#' 1. loading_fun loading_fun extract outputs from rifi_stats of all conditions
+#' and join each data to the differential expression table. 
+#'
+#' 2. joining_data_column joins two data frames from different conditions by 
+#' column.
+#'
+#' 3. joining_data_row joins two data frames from different conditions by row.
+#'
+#' 4. penalties finds the best set of penalties for half-life and intensity
+#' fragmentation using dynamic programming. 
+#'
+#' 5. fragmentation fragments the half-life and intensity into segments using
+#' the penalties output.
+#'
+#' 6. statistics uses t-test to check HL and intensity segments significance.
+#' 
+#' 7. rifi_visualization_comparison plots the genome annotation, half-life and 
+#' intensity segments. 
+#' 
+#' 8. figures_fun plots at one the density of HL, the HL category as histogram,
+#' log2FC of decay and synthesis rate and their heatscatter.
+#' 
+#' 9. adjusting_HLToInt merges HL and intensity segments adapting the positions 
+#' to each other and combining to the genome annotation.
+#' 
+#' @param data1 data frame from rifi_stats of one condition
+#' @param data2 data frame from rifi_stats of other condition
+#' @param data3 data frame from differential gene expression at time 0
+#'
+#' @return Several plots, Data frame with the summary of the segments adapted to 
+#' each other and the plot visualization of the segments with the corresponding
+#' genome annotation. 
+#' 
+#'
+#' @examples
+#' loading_fun(x,....)
+#' joining_data_column(x,...)
+#' joining_data_row(x,....)
+#' penalties(x,....)
+#' fragmentation(x, ....)
+#' statistics(x,...)
+#' rifi_visualization_comparison(x,....)
+#' figure_fun(x,....)
+#' adjusting_HLToInt(x,.....)
+#' 
+#' @export
+#' 

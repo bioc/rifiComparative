@@ -2,9 +2,9 @@
 #  fragmentation       
 # -------------------------------------------------------------------------
 #
-#' 'fragmentation': Conveniently wraps all fragmentation steps
+#' fragmentation: Conveniently wraps all fragmentation steps
 #' 
-#' 'fragmentation': fragments the half-life and intensity into segments using 
+#' fragmentation fragments the half-life and intensity into segments using 
 #' the penalties output. 
 #'
 #' @param data data frame: data frame combined data by column
