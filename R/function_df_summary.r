@@ -5,17 +5,25 @@ annotation_function_df <-
       as.character(data_annotation[, "region"])
     data_annotation <-
       data_annotation[which(data_annotation[, "strand"] %in% strand),]
-    positions.1 <- data_annotation[between(data_annotation$end, pos.1, pos.2), "end"]
-    positions.2 <- data_annotation[between(data_annotation$start, pos.1, pos.2),
-                                   "start"]
-    positions <- unique(c(positions.1, positions.2))
+    
+    positions.1 <- data_annotation[
+      between(data_annotation$end, pos.1, pos.2), "end"]
+    positions.2 <- data_annotation[
+      between(data_annotation$start, pos.1, pos.2),
+      "start"]
+    positions.1.1 <- data_annotation[
+      which(pos.1 >= data_annotation$start & pos.2 <= data_annotation$end), "start"]
+    positions.2.2 <- data_annotation[
+      which(pos.1 >= data_annotation$start & pos.2 <= data_annotation$end), "end"]
+    
+    positions <- unique(c(positions.1, positions.2, positions.1.1, positions.2.2))
     positions <- positions[order(positions, decreasing = F)]
-      features  <-
-            unique(c(data_annotation[between(data_annotation$start, positions[1],
-                                    last(positions)), feature],
-             data_annotation[between(data_annotation$end, positions[1],
-                              last(positions)), feature]))
- 
+    features  <-
+      unique(c(data_annotation[between(data_annotation$start, positions[1],
+                                       last(positions)), feature],
+               data_annotation[between(data_annotation$end, positions[1],
+                                       last(positions)), feature]))
+    
     return(features)
   }
 
