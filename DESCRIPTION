@@ -46,7 +46,7 @@ Suggests:
 	BiocStyle
 VignetteBuilder: knitr	
 biocViews: RNASeq, DifferentialExpression, GeneRegulation, Transcriptomics, Microarray, Software
-BugReports: https://github.com/lyoussar/rifiComparative
+BugReports: https://github.com/CyanolabFreiburg/rifiComparative
 License: GPL-3 + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
