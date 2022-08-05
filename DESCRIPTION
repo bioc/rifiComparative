@@ -1,6 +1,6 @@
 Package: rifiComparative
 Title: 'rifiComparative' compares the output of rifi from 2 different conditions. 
-Version: 0.99.1
+Version: 0.99.2
 Authors@R: c(person("Loubna", "Youssar",
       email = "lyoussar@gmail.com",
       role = c("aut", "cre")),
