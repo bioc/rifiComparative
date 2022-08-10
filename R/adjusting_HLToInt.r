@@ -53,11 +53,9 @@
 #'      decay(condition2))}
 #'      \item{log2FC(synthesis_rate):}{Integer, sum of log2FC(decay_rate) and
 #'      log2FC(intensity)}
-#'      \item{Log2FC(HL)-Log2FC(int):}{Integer, difference between
-#'      log2FC(decay_rate) and log2FC(intensity)}
 #'      \item{intensity_FC:}{Integer, log2FC(mean(intensity(condition1))/mean(
 #'      intensity(condition2)))}
-#'      \item{Log2FC(HL)-Log2FC(int):}{Integer, sum of log2FC(decay_rate) and
+#'      \item{Log2FC(HL)+Log2FC(int):}{Integer, sum of log2FC(decay_rate) and
 #'      log2FC(intensity)}
 #'      \item{p_value:}{String, indicated by "*" means at least one fragment
 #'      either HL fragment or intensity fragment has a significant p_value}
@@ -98,7 +96,6 @@ adjusting_HLToInt <-
         Mean_int_fragment <- c()
         Decay_rate <- c()
         Synthesis_rate <- c()
-        Trans_post <- c()
         intensity_FC <- c()
         p_value <- c()
         
@@ -127,7 +124,6 @@ adjusting_HLToInt <-
                 mean_int_fragment <- NA
                 decay_rate <- NA
                 synthesis_rate <- NA
-                trans_post <- NA
                 Description <- NA
                 
                 #selecting strand
@@ -248,7 +244,6 @@ adjusting_HLToInt <-
                                 c(Mean_int_fragment, NA)
                             Decay_rate <- c(Decay_rate, NA)
                             Synthesis_rate <- c(Synthesis_rate, NA)
-                            Trans_post <- c(Trans_post, NA)
                             intensity_FC <- c(intensity_FC, NA)
                             p_value <- c(p_value, NA)
                         }
@@ -266,12 +261,6 @@ adjusting_HLToInt <-
                             Decay_rate <- c(Decay_rate,
                                             calculating_rate(hl_int)[[1]])
                             ##ratio between log2FC(decay) and log2FC(intensity)
-                            Trans_post <-
-                                c(
-                                    Trans_post,
-                                    calculating_rate(hl_int)[[1]] -
-                                        calculating_rate(hl_int)[[2]]
-                                )
                             intensity_FC <-
                                 c(intensity_FC, log2(
                                     mean(hl_int$intensity.cdt1) /
@@ -321,7 +310,6 @@ adjusting_HLToInt <-
                             c(Mean_int_fragment, NA)
                         Decay_rate <- c(Decay_rate, NA)
                         Synthesis_rate <- c(Synthesis_rate, NA)
-                        Trans_post <- c(Trans_post, NA)
                         intensity_FC <- c(intensity_FC, NA)
                         p_value <- c(p_value, NA)
                     }
@@ -332,12 +320,6 @@ adjusting_HLToInt <-
                         Decay_rate <-
                             c(Decay_rate,
                               calculating_rate(f_withoutOutlier)[[1]])
-                        Trans_post <-
-                            c(
-                                Trans_post,
-                                calculating_rate(f_withoutOutlier)[[1]] -
-                                    calculating_rate(f_withoutOutlier)[[2]]
-                            )
                         Synthesis_rate <- c(
                             Synthesis_rate,
                             calculating_rate(f_withoutOutlier)[[1]] +
@@ -370,7 +352,6 @@ adjusting_HLToInt <-
                     Mean_HL_fragment,
                     Mean_int_fragment,
                     Decay_rate,
-                    Trans_post,
                     Synthesis_rate,
                     intensity_FC,
                     p_value

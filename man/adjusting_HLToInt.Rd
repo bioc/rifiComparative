@@ -34,11 +34,9 @@ fragments involved}
 decay(condition2))}
 \item{log2FC(synthesis_rate):}{Integer, sum of log2FC(decay_rate) and
 log2FC(intensity)}
-\item{Log2FC(HL)-Log2FC(int):}{Integer, difference between
-log2FC(decay_rate) and log2FC(intensity)}
 \item{intensity_FC:}{Integer, log2FC(mean(intensity(condition1))/mean(
 intensity(condition2)))}
-\item{Log2FC(HL)-Log2FC(int):}{Integer, sum of log2FC(decay_rate) and
+\item{Log2FC(HL)+Log2FC(int):}{Integer, sum of log2FC(decay_rate) and
 log2FC(intensity)}
 \item{p_value:}{String, indicated by "*" means at least one fragment
 either HL fragment or intensity fragment has a significant p_value}
