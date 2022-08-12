@@ -151,7 +151,7 @@ adjusting_HLToInt <-
                 # select strand on the annotation data frame
                 ann <- as.data.frame(annotation) %>%
                     filter(strand == Strand[j])
-
+                
                 tryCatch({
                     region <-  
                         paste0(annotation_function_df(
@@ -329,7 +329,7 @@ adjusting_HLToInt <-
                                           log2(
                                               mean(
                                                   f_withoutOutlier$intensity.cdt1) /
-                                              mean(f_withoutOutlier$intensity.cdt2)
+                                                  mean(f_withoutOutlier$intensity.cdt2)
                                           ))
                         if (p_values[1] < .05 | p_values[2] < .05) {
                             p_value <- c(p_value, "*")
