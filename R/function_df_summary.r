@@ -17,7 +17,7 @@ annotation_function_df <-
       which(pos.1 >= data_annotation$start & pos.2 <= data_annotation$end), "end"]
     
     positions <- unique(c(positions.1, positions.2, positions.1.1, positions.2.2))
-    positions <- positions[order(positions, decreasing = F)]
+    positions <- positions[order(positions, decreasing = FALSE)]
     features  <-
       unique(c(data_annotation[between(data_annotation$start, positions[1],
                                        last(positions)), feature],
