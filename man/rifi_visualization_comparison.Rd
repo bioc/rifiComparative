@@ -156,4 +156,5 @@ rifi_visualization_comparison(
     genomeLength = annot_g[[2]],
     annot = annot_g[[1]]
     ) 
+    
 }

@@ -16,7 +16,7 @@ plot_histogram <- function(data, cdt1, cdt2) {
         x / sum(x))
     
     colnames(hist_sf)[1:2] <- c(cdt1, cdt2)
-    hist_sf <- reshape2::melt(hist_sf)
+    hist_sf <- reshape2::melt(hist_sf, id.vars = "category")
     
     h <- ggplot(hist_sf, aes(x = category, y = value,
                         fill = variable)) +

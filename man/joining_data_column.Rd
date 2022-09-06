@@ -26,4 +26,5 @@ column.
 \examples{
 data(data_combined_minimal)
 df_comb_minimal <- joining_data_column(data = data_combined_minimal)
+
 }

@@ -66,6 +66,7 @@
 #' data(annot_g)
 #' df_mean_minimal <- adjusting_HLToInt(data = stats_df_comb_minimal,
 #' annotation = annot_g[[1]])
+#' 
 #' @export
 
 
@@ -206,7 +207,8 @@ adjusting_HLToInt <-
                         hl_int <- f_withoutOutlier %>%
                             filter(intensity_comb_fragment == f_int[k])
                         
-                        #extract the mean of distance delimiting int fragment positions
+                        #extract the mean of distance delimiting int fragment 
+                        #positions
                         fg_hl <- mean_length_hl(hl_int)
                         
                         #delimit the intensity fragment positions
