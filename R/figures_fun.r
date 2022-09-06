@@ -51,6 +51,7 @@
 #' figures_fun(data.1 = df_mean_minimal, data.2 = data_combined_minimal, 
 #' input.1 = df_comb_minimal, input.2 = differential_expression, cdt1 = "sc", 
 #' cdt2 = "fe") 
+#' 
 #' @export
 
 

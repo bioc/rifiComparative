@@ -1,12 +1,12 @@
 #' File for imported functions
-#' @import dplyr
-#' @import ggplot2
-#' @import SummarizedExperiment
-#' @import scales
-#' @import writexl
-#' @import DTA
-#' @import ggrepel
-#' @import LSD
+#' 
+#' 
+#' @importFrom SummarizedExperiment rowRanges 
+#' @importFrom scales alpha
+#' @importFrom dplyr filter summarise mutate between full_join left_join
+#' @importFrom ggrepel geom_text_repel
+#' @importFrom LSD heatscatter
+#' @importFrom ggplot2 ggplot
 #' @importFrom cowplot background_grid
 #' @importFrom reshape2 melt
 #' @importFrom doMC registerDoMC

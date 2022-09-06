@@ -70,4 +70,5 @@ data(stats_df_comb_minimal)
 data(annot_g)
 df_mean_minimal <- adjusting_HLToInt(data = stats_df_comb_minimal,
 annotation = annot_g[[1]])
+
 }

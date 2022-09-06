@@ -1,6 +1,11 @@
 Package: rifiComparative
+<<<<<<< HEAD
 Title: 'rifiComparative' compares the output of rifi from 2 different conditions. 
 Version: 0.99.2
+=======
+Title: 'rifiComparative' compares the output of rifi from 2 different conditions
+Version: 0.99.1
+>>>>>>> 508b71761c99dde863a54a0ac691928ad47a0cd7
 Authors@R: c(person("Loubna", "Youssar",
       email = "lyoussar@gmail.com",
       role = c("aut", "cre")),
@@ -39,7 +44,6 @@ Imports:
 	SummarizedExperiment
 Suggests:
 	DescTools,
-	ggrepel,
 	knitr,
 	rmarkdown,
 	BiocStyle
