@@ -41,33 +41,22 @@ path directory.
 ## I. Introduction
 
 rifiComparative is a successor framework of Rifi
-<<<<<<< HEAD:vignettes/vignette.Rmd
-*(https://www.bioconductor.org/packages/release/bioc/html/rifi.html)*. Generated
-outputs from the same organism with different treatments could be segment based compared. Trying to combine segments from different conditions is not straight 
-forward and makes the data analysis nearly impossible. Therefore we developed a 
-new workflow, rifiComparative, with an easy strategy to make 2 conditions 
-comparable. 
-=======
 *(https://github.com/CyanolabFreiburg/rifi)*. Generated outputs from the same
 organism with different treatments could be compared. Trying to combine segments
 of the same gene from different conditions is not straight forward and makes the
 data analysis nearly impossible. Therefore we developed a new workflow, 
 rifiComparative, with an easy strategy to make 2 conditions comparable. 
->>>>>>> 508b71761c99dde863a54a0ac691928ad47a0cd7:vignettes/rifiComparative.Rmd
 The principle of rifiComparative consists on segmenting the half-life 
 (difference between half-life (condition1) and half-life (condition2) 
 at probe/bin level) and segmenting intensity using the log2FC(mRNA at time 0). 
 The workflow does not apply any hierarchy. Half-life (later HL) and intensity 
 segmentation are independent.  
-<<<<<<< HEAD:vignettes/vignette.Rmd
-The fragments resulting from clustering of HL and intensity are compared using
-=======
 The fragments result of clustering from HL and intensity are compared using
->>>>>>> 508b71761c99dde863a54a0ac691928ad47a0cd7:vignettes/rifiComparative.Rmd
 log2FC(log2FC(half-life)/log2FC(intensity)). These values are a pre-analysis for
 transcription and post-transcription regulation. Events for each treatment are 
 depicted with the position on the genome (For more detail, refer to section visualization).
-P-values from statistical tests are estimated. rifiComparative generates data frame summary, genome plot and several figures (refer to section Plots for more details).
+P-values from statistical tests are estimated. rifiComparative generates data frame summary, 
+genome plot and several figures (refer to section Plots for more details).
 
 
 ## II. Workflow
