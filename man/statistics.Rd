@@ -25,4 +25,5 @@ The function used is t_test_function.
 data(fragment_int)
 stats_df_comb_minimal <- statistics(data= fragment_int)[[1]]
 df_comb_uniq_minimal <- statistics(data= fragment_int)[[2]]
+
 }

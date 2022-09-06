@@ -68,6 +68,7 @@
 #' data(annot_g)
 #' df_adjusting_HLToInt <- adjusting_HLToInt(data = stats_df_comb_minimal,
 #' annotation = annot_g[[1]])
+#' 
 #' @export
 
 

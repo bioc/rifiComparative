@@ -2,28 +2,65 @@
 
 ## About
 
-RifiComparative is a workflow for a comparative data, output of Rifi framework (<https://github.com/CyanolabFreiburg/rifi>). RifiComparative compares two outputs from 2 different conditions of the same organism. Rifi outputs differ from other depending on the transcriptome regulation. We end up with segments from 2 conditions with different length, position and events making a direct comparative data nearly impossible (Figure. 1). To solve this issue, we come up with a strategy (Figure. 2). The data from both conditions are gathered together a segmentation of half-life and mRNA at time 0 of both conditions is applied. The absolute value of half-life difference at probe level is used as input for half-life segmentation on one hand and the fold-change of mRNA at time 0 is used as input for segmentation of intensity on other hand. Differently of Rifi, no hierarchy is applied after comparing the outputs with and without hierarchy (Figure. 3). As for Rifi, a sub-set of the data is trained preliminary to get the best set of penalties and for segmentation usage. After segmentation, the fragments are statistically tested and a p_value is assigned. To make a consistent comparison the fragments from half-life and mRNA at time 0 are adjusted to each other. We end-up with a single fragment length for both parameters (Figure. 4). Each fragment has the corresponding annotation on the genome. The half-life, intensity fragments, the TUs from each condition, events as termination and iTSS_II and the genome annotation could be plotted (Figure. 5).
-The package provides a serie of plots to facilitate the analysis. Figure. 6 and 7 show decay rate versus synthesis rate. Some points of interest could be colored or labeled using the segment annotation.
+RifiComparative is a workflow for a comparative data, output of Rifi framework (<https://github.com/CyanolabFreiburg/rifi>). RifiComparative compares two outputs from 2 different conditions of the same organism. The rifi outputs are different from one condition to other depending on the transcriptome regulation. We end up with segments with different length, position and events making a direct comparative of 2 conditions nearly impossible (Figure. 1). To solve this issue, we come up with a strategy (Figure. 2). The data from both conditions are gathered together and a segmentation of half-life and mRNA at time 0 of both conditions is applied. The absolute value of half-life difference at probe level is used as input for half-life segmentation on one hand and the fold-change of mRNA at time 0 is used as input for segmentation of intensity on other hand. Differently of rifi, no hierarchy is applied (Figure. 3). As for rifi, a sub-set of the data is trained preliminary to get the best set of penalties and for segmentation usage. After segmentation, the fragments are statistically tested and a p_value is assigned. To make a consistent comparison the fragments from half-life and mRNA at time 0 are adjusted to each other. We end-up with a single fragment length for both parameters (Figure. 4). Each fragment has the corresponding annotation on the genome. The half-life, intensity fragments, the TUs from each condition, events as termination and iTSS_II and the genome annotation could be plotted (Figure. 5). The package provides a serie of plots to facilitate the analysis. Figure. 6 and 7 show decay rate versus synthesis rate. Some points of interest could be colored or labeled using the segment annotation.
 
-<br/> <p align="center"> <img src="https://github.com/CyanolabFreiburg/rifiComparative/blob/main/vignettes/rifiComparative_workflow.png"/> </p> <sub> <b>Figure 1:</b> rifi Comparative workflow. Four major steps are depicted. 1) Gathering the data from two conditions, 2) penalties set, 3) segmentation, 4) adjusting the fragments to each other, 5) genome visualization together with the fragment. </sub>
+<br/>
 
-<br/> <p align="center"> <img src="https://github.com/CyanolabFreiburg/rifiComparative/blob/main/vignettes/Half-life_Fragments_two_conditions.png"/> </p>
+<p align="center">
+
+<img src="https://github.com/CyanolabFreiburg/rifiComparative/blob/main/vignettes/rifiComparative_workflow.png"/>
+
+</p>
+
+<sub> <b>Figure 1:</b> rifi Comparative workflow. Four major steps are depicted. 1) Gathering the data from two conditions, 2) penalties set, 3) segmentation, 4) adjusting the fragments to each other, 5) genome visualization together with the fragment. </sub>
+
+<br/>
+
+<p align="center">
+
+<img src="https://github.com/CyanolabFreiburg/rifiComparative/blob/main/vignettes/Half-life_Fragments_two_conditions.png"/>
+
+</p>
 
 <sub> <b>Figure 2:</b> Segments output of Rifi. The segments are very different making the comparison nearly impossible. </sub>
 
-<br/> <p align="center"> <img src="https://github.com/CyanolabFreiburg/rifiComparative/blob/main/vignettes/Half-life_difference.png"/> </p>
+<br/>
+
+<p align="center">
+
+<img src="https://github.com/CyanolabFreiburg/rifiComparative/blob/main/vignettes/Half-life_difference.png"/>
+
+</p>
 
 <sub> <b> Figure 3:</b> Half-life difference. Difference between Half-life from both conditions is calculated by bin or probe (distance = abs(diff(half-life(cdt 1)(Pi) - half-life(cdt 2)(Pi)))). cdt = condition and Pi = position i. </sub>
 
-<br/> <p align="center"> <img src="https://github.com/CyanolabFreiburg/rifiComparative/blob/main/vignettes/adjusting_fragments.png"/> </p>
+<br/>
+
+<p align="center">
+
+<img src="https://github.com/CyanolabFreiburg/rifiComparative/blob/main/vignettes/adjusting_fragments.png"/>
+
+</p>
 
 <sub> <b> Figure 4:</b> Adjusting half-life and intensity to each other. The adjustment was applied only if at least one fragment has a significant p_value. Numbers are just fragments indicator.</sub>
 
-<br/> <p align="center"> <img src="https://github.com/CyanolabFreiburg/rifiComparative/blob/main/vignettes/Decay_rate_vs_Synthesis_rate.png" alt="drawing" width="400"/> </p>
+<br/>
+
+<p align="center">
+
+<img src="https://github.com/CyanolabFreiburg/rifiComparative/blob/main/vignettes/Decay_rate_vs_Synthesis_rate.png" alt="drawing" width="400"/>
+
+</p>
 
 <sub> <b> Figure 5:</b> a Plot changes in RNA decay rates (log fold, x-axis) versus the changes in RNA synthesis rates (log fold, y-axis) in the condition 1 versus condition 2. The black lines horizontal, vertical and diagonal are the median of synthesis_rate, decay_rate and mRNA at time 0 respectively. Dashed gray lines indicate 0.5-fold changes from 0 (gray lines) referring to unchanged fold. The points highlighted with yellow color show a decay rate \>= .5 and synthesis rate \<= -.5. </sub>
 
-<br/> <p align="center"> <img src="https://github.com/CyanolabFreiburg/rifiComparative/blob/main/vignettes/heatscatter_Decay_rate_vs_Synthesis_rate.png" alt="drawing" width="600"/> </p> 
+<br/>
+
+<p align="center">
+
+<img src="https://github.com/CyanolabFreiburg/rifiComparative/blob/main/vignettes/heatscatter_Decay_rate_vs_Synthesis_rate.png" alt="drawing" width="600"/>
+
+</p>
 
 <sub> <b> Figure 6:</b> Plot of the changes in RNA decay rates (log fold, x-axis) versus the changes in RNA synthesis rates (log fold, y-axis) in the condition 1 versus condition 2. The coloring indicates the local point density. </sub>
 

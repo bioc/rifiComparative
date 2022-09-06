@@ -17,6 +17,7 @@
 #' data(fragment_int)
 #' stats_df_comb_minimal <- statistics(data= fragment_int)[[1]]
 #' df_comb_uniq_minimal <- statistics(data= fragment_int)[[2]]
+#' 
 #' @export
 
 statistics <- function(data){
@@ -70,4 +71,4 @@ statistics <- function(data){
             data[!duplicated(data[,"intensity_comb_fragment"]), ]
         
         return(list(data, df_comb_uniq))
-        }
+}
