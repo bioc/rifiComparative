@@ -5,7 +5,7 @@
 #' statistics check segments significance using statistical test
 #' 
 #' statistics uses t-test to check HL and intensity segments significance. The 
-#' function returns the data frame with p_value p_value adjusted. 
+#' function returns the data frame with p_value and p_value adjusted. 
 #' The function used is t_test_function.
 #'
 #' @param data data frame: data frame output of fragmentation
@@ -23,7 +23,7 @@
 
 statistics <- function(data){
     
-    #eliminate outlier from HL fragment
+    #eliminate outliers from HL fragment
     frag_HL <-
         unique(data[,"HL_comb_fragment"][
             grep(paste0("Dc_\\d+$"), data[,"HL_comb_fragment"])])
