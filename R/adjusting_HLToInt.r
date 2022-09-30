@@ -76,8 +76,8 @@ adjusting_HLToInt <-
              annotation) {
         # distance HL between two conditions. log2 is applied after dynamic
         # programming to compare HL with intensity
-        colnames(data)[c(25,27)] <- c("p_value_distance_HL", 
-                                      "p_value_distance_intensity") 
+        # colnames(data)[c(25,27)] <- c("p_value_distance_HL", 
+        #                               "p_value_distance_intensity") 
         data[, "distance_HL_log"] <-
             log2(data[, "half_life.cdt1"] / data[, "half_life.cdt2"])
         

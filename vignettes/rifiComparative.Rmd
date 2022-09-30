@@ -300,7 +300,7 @@ Three objects are required:
  annot : ggf3 preprocessed (for more information, see below)
  
 The plot is located on vignette "genome_fragments_comparison.pdf" and shows 3 sections: annotation, half-life difference and log2FC (mRNA=time0 or intensity).
-Either half_life difference or log2FC(intensity), the line 0 indicate no changes between both conditions. Conditions 1 and 2 are indicated by blue and lilac color respectively. Fragments result of dynamic programming are indicated by different colors.
+Either half_life difference or log2FC(intensity), the line 0 indicates no changes between both conditions. Conditions 1 and 2 are indicated by blue and lilac color respectively. Fragments result of dynamic programming are indicated by different colors.
 The annotation englobes genome annotation preprocessed by gff3_preprocessing function included on the package and a superposed TU annotation of both conditions from rifi output.
 
 <br/><br/>
