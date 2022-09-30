@@ -16,7 +16,7 @@ from intensity and could be saved as an excel file.
 }
 \description{
 statistics uses t-test to check HL and intensity segments significance. The
-function returns the data frame with p_value p_value adjusted.
+function returns the data frame with p_value and p_value adjusted.
 The function used is t_test_function.
 }
 \examples{
