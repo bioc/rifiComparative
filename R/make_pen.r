@@ -29,19 +29,17 @@
 #' @param cores integer: the number of assigned cores for the task
 #' @param logs numeric vector: the logbook vector.
 #' @param dpt integer: the number of times a full iteration cycle is repeated
-#' with a more narrow range based on the previous cycle. Default is 1.
-#' @param smpl_min integer: the smaller end of the sampling size. Default is 10.
-#' @param smpl_max integer: the larger end of the sampling size. Default is 100.
-#' @param sta_pen numeric: the lower starting penalty. Default is 0.5.
-#' @param end_pen numeric: the higher starting penalty. Default is 4.5.
+#' with a more narrow range based on the previous cycle.
+#' @param smpl_min integer: the smaller end of the sampling size. 
+#' @param smpl_max integer: the larger end of the sampling size. 
+#' @param sta_pen numeric: the lower starting penalty. 
+#' @param end_pen numeric: the higher starting penalty. 
 #' @param rez_pen numeric: the number of penalties iterated within the penalty
-#' range. Default is 9.
-#' @param sta_pen_out numeric: the lower starting outlier penalty. Default is 
-#' 0.5.
-#' @param end_pen_out numeric: the higher starting outlier penalty. Default is
-#' 3.5.
+#' range. 
+#' @param sta_pen_out numeric: the lower starting outlier penalty. 
+#' @param end_pen_out numeric: the higher starting outlier penalty. 
 #' @param rez_pen_out numeric: the number of outlier penalties iterated within
-#' the outlier penalty range. Default is 7.
+#' the outlier penalty range. 
 #'
 #' @return A list with 4 items:
 #'     \describe{
