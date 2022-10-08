@@ -3,19 +3,46 @@ CHANGES IN VERSION 0.99.1
 
   o Significant changes in documentation making it easier to read.
   
-  o Bugs in Vignettes are corrected
+  o Bugs in vignettes are corrected
   
   o Suppress warnings in visualization is added
   
   o Several typo errors are corrected
 
 
-
-CHANGES IN VERSION 
+CHANGES IN VERSION 0.99.2
 -------------------------
 
+  o Supress unecessary comments
+  
+  o Bugs in vignettes are corrected
+  
+  o Several typo errors are corrected
 
 
+CHANGES IN VERSION 0.99.3
+-------------------------
+
+  o Improve import file by indicating the functions used of soem packages
+  
+  o making rifiComparative documenation accessible by using "?rifiComparative"
+  
+  o Improving some naming files as in vignette
+  
+
+CHANGES IN VERSION 0.99.4
+-------------------------
+
+  o Fixing error while building the package
 
 
+CHANGES IN VERSION 0.99.5
+-------------------------
+
+  o Update News file
+  
+  o Usage of back ticks around variable in vignettes
+  
+  o deleting details e.g. "Default is" in documentation
+  
 

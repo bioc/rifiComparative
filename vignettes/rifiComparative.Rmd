@@ -40,7 +40,7 @@ path directory.
 
 ## I. Introduction
 
-rifiComparative is a successor framework of Rifi
+rifiComparative is a successor framework of `r BiocStyle::Biocpkg("rifi")`
 *(https://github.com/CyanolabFreiburg/rifi)*. Generated outputs from the same
 organism with different treatments could be compared. Trying to combine segments
 of the same gene from different conditions is not straight forward and makes the
@@ -49,14 +49,13 @@ rifiComparative, with an easy strategy to make 2 conditions comparable.
 The principle of rifiComparative consists on segmenting the half-life 
 (difference between half-life (condition1) and half-life (condition2) 
 at probe/bin level) and segmenting intensity using the log2FC(mRNA at time 0). 
-The workflow does not apply any hierarchy. Half-life (later HL) and intensity 
-segmentation are independent.  
-The fragments result of clustering from HL and intensity are compared using
+The workflow does not apply any hierarchy. Half-life (in some cases, HL) and 
+intensity segmentation are independent.  
+The fragments result of clustering from half-life and intensity are compared using
 log2FC(log2FC(half-life)/log2FC(intensity)). These values are a pre-analysis for
 transcription and post-transcription regulation. Events for each treatment are 
 depicted with the position on the genome (For more detail, refer to section visualization).
-P-values from statistical tests are estimated. rifiComparative generates data frame summary, 
-genome plot and several figures (refer to section Plots for more details).
+P-values from statistical tests are estimated. rifiComparative generates data frame summary, genome plot and several figures (refer to section Plots for more details).
 
 
 ## II. Workflow
@@ -69,17 +68,16 @@ saved and used as input for the next analysis.
 
 The functions used are:
 
-`loading_fun`: you need to load either rifi_fit or rifi_stats outputs from
-each condition and place all in one directory. rifi_fit is sufficient to run the 
-workflow unless if you want to select more column from rifi_stats for more 
+`loading_fun`: you need to load either `rifi_fit` or `rifi_stats` outputs from
+each condition and place all in one directory. `rifi_fit` is sufficient to run the 
+workflow unless if you want to select more column from `rifi_stats` for more 
 analysis or plot. The "cdt" is added referring to the sample condition. 
 
 <span style="color:red"> Very important: </span> you will need to run the 
 differential expression at probe/bin level. This is the log2FC(intensity) or 
 log2FC(mRNA at time 0). Pick-up the logFC, the p_value adjusted, probe position 
-and strand columns. Save the first two as 'logFC_int' and 'P.Value'. 
-You can use either `left_join` or `right_join` from the 
-`r BiocStyle::CRANpkg("dplyr")` package to join both data by strand and position. 
+and strand columns. Save the first two as `logFC_int` and `P.Value`. You can use either `left_join` or `right_join` from the `r BiocStyle::CRANpkg("dplyr")` 
+package to join both data by strand and position. 
 <br/><br/>
 
 ``` {r loading_fun, eval = TRUE}
@@ -121,12 +119,13 @@ head(df_comb_minimal, 5)
 
 ### 2. Penalties
 
-Same as rifi workflow, to get the best segmentation we need the optimal penalties. 
-To calculate HL penalty, the difference between half-life from both conditions
-is calculated and added as distance_HL variable to df_comb_minimal data frame.
-On other hand the logFC_int is used to assign penalties for intensity values and
-added as distance_int variable. df_comb_minimal with the additional variables is
-named penalties_df.
+Same as `r BiocStyle::Biocpkg("rifi")` workflow, to get the best segmentation we
+need the optimal penalties. 
+To calculate half-life penalty, the difference between half-life from both conditions is calculated and added as `distance_HL` variable to `df_comb_minimal`
+data frame.
+On other hand the `logFC_int` is used to assign penalties for intensity values 
+and added as distance_int variable. `df_comb_minimal` with the additional variables
+is named `penalties_df`.
 
 The functions needed for penalty are:
 
@@ -145,14 +144,13 @@ assign penalties for the dynamic programming. the function iterates over many
 penalty pairs and picks the most suitable pair based on the difference between
 wrong and correct splits. The sample size, penalty range and resolution as well
 as the number of cycles can be customized. The primary start parameters create 
-a matrix with n = rez_pen rows and n = rez_pen_out columns with values between
+a matrix with n = `rez_pen` rows and n = `rez_pen_out` columns with values between
 sta_pen/sta_pen_out and end_pen/end_pen_out. The best penalty pair is
 picked. If dept is bigger than 1 the same process is repeated with a new matrix
 of the same size based on the result of the previous cycle. Only position
 segments with length within the sample size range are considered for the
 penalties to increase run time. Also, outlier penalties cannot be smaller
-than 40% of the respective penalty. For more detail check vignette from rifi
-package.
+than 40% of the respective penalty. For more detail check vignette from `r BiocStyle::Biocpkg("rifi")` package.
 <br/><br/>
 
 #### 2. `fragment_HL_pen`
@@ -223,8 +221,8 @@ The functions used are:
 #### 1. `fragment_HL`
 
 `fragment_HL` performs the half_life fragmentation and assigns all gathered 
-information to the probe based data frame. The columns "HL_comb_fragment" and 
-"HL_mean_comb_fragment" are added to data frame. `fragment_HL` makes 
+information to the probe based data frame. The columns `HL_comb_fragment` and 
+`HL_mean_comb_fragment` are added to data frame. `fragment_HL` makes 
 half-life_fragments and assigns the mean of each fragment.
 
 ``` {r fragment_HL, eval = TRUE}
@@ -241,9 +239,9 @@ penalties_df <-
 #### 2. `fragment_inty`
 
 `fragment_inty` performs the intensity fragmentation and assigns all gathered
-information to the probe based data frame. The columns "intensity_comb_fragment"
-and "intensity_mean_comb_ fragment" are added to the data frame. `fragment_inty` 
-makes intensity_fragments and assigns the mean of each fragment.
+information to the probe based data frame. The columns `intensity_comb_fragment`
+and `intensity_mean_comb_fragment` are added to the data frame. `fragment_inty` 
+makes `intensity_fragments` and assigns the mean of each fragment.
 The hierarchy is not followed, fragments from different size could be generated 
 independently of half-life fragments.
 
@@ -275,11 +273,11 @@ stats_df_comb_minimal <- statistics(data= fragment_int)[[1]]
 df_comb_uniq_minimal <- statistics(data= fragment_int)[[2]]
 ```
 
-
 ### 5. Visualization
 
 The visualization depicts half-life and intensity slots of the fragments. Since 
-hierarchy is not applied, the fragments from half-life and intensity are independent.
+hierarchy is not applied, the fragments from half-life and intensity are 
+independent.
 
 ``` {r rifi_visualization_comparison, eval = FALSE}
 data(data_combined_minimal)
@@ -295,13 +293,14 @@ rifi_visualization_comparison(
 
 Three objects are required:
 
- data_combined_minimal : data frame from joined data by row.
- df_comb_minimal : data frame from joined data by column
- annot : ggf3 preprocessed (for more information, see below)
+ `data_combined_minimal` : data frame from joined data by row.
+ `df_comb_minimal` : data frame from joined data by column
+ `annot` : ggf3 preprocessed (for more information, see below)
  
-The plot is located on vignette "genome_fragments_comparison.pdf" and shows 3 sections: annotation, half-life difference and log2FC (mRNA=time0 or intensity).
+The plot is located on vignette "genome_fragments_comparison.pdf" and shows 3 sections: `annotation`, half-life difference and log2FC (mRNA=time0 or intensity).
 Either half_life difference or log2FC(intensity), the line 0 indicates no changes between both conditions. Conditions 1 and 2 are indicated by blue and lilac color respectively. Fragments result of dynamic programming are indicated by different colors.
-The annotation englobes genome annotation preprocessed by gff3_preprocessing function included on the package and a superposed TU annotation of both conditions from rifi output.
+The annotation englobes genome annotation preprocessed by gff3_preprocessing function included on the package and a superposed TU annotation of both conditions from
+`r BiocStyle::Biocpkg("rifi")` output.
 
 <br/><br/>
 ``` {r visualization, echo = FALSE, fig.cap = "**genome fragments visualization of both conditions**", out.width = '100%'}
@@ -313,20 +312,23 @@ knitr::include_graphics("visualization_cdts.png")
 
 ### 1. `adjusting_HLToInt`
 
-`adjusting_HLToInt` function combines HL and intensity fragments generated 
-without hierarchy on one hand and the genome annotation on other hand. The first step is adjusting the fragments from HL to intensity and vise-versa and join them to the genome annotation. To make HL and intensity segments comparable, log2FC(HL) is used instead of distance_HL. At least one fragment should have a significant p_value from t-test, either HL or intensity. 
+`adjusting_HLToInt` function combines half-life and intensity fragments generated 
+without hierarchy on one hand and the genome annotation on other hand. The first
+step is adjusting the fragments from half-life to intensity and vise-versa and join 
+them to the genome annotation. To make half-life and intensity segments comparable, 
+`log2FC(HL)` is used instead of `distance_HL`. At least one fragment should have 
+a significant p_value from t-test, either half-life or intensity. 
 
 To generate the data frame, two objects are required:
 
- df_comb_minimal : data frame from joined data by column.
- annot : ggf3 preprocessed (for more information, see below).
+ `df_comb_minimal` : data frame from joined data by column.
+ `annot` : ggf3 preprocessed (for more information, see below).
 
 The functions used are:
 
-`p_value_function` extracts and return the p_values of HL and intensity segments
-respectively.
+`p_value_function` extracts and return the p_values of half-life and intensity segments respectively.
 
-`eliminate_outlier_hl` eliminates outliers from HL fragments.
+`eliminate_outlier_hl` eliminates outliers from half-life fragments.
 
 `eliminate_outlier_int` eliminates outliers from intensity fragments.
 
@@ -357,8 +359,7 @@ The output data frame contains the corresponding columns:
  **Log2FC(HL)-Log2FC(int)**: sum of log2FC(decay_rate) and log2FC(intensity).
  **intensity_FC**: log2FC(mean(intensity(condition1))/mean(intensity(condition2))).
  **Log2FC(HL)-Log2FC(int)**: sum of log2FC(decay_rate) and log2FC(intensity).
- **p_value**:indicated by "*" means at least one fragment either HL fragment or 
- intensity fragment has a significant p_value.
+ **p_value**: indicated by "*" means at least one fragment either half-life fragment or intensity fragment has a significant p_value.
 
 ``` {r adjusting_HLToInt, eval = TRUE}
 data(stats_df_comb_minimal) 
@@ -399,15 +400,11 @@ included are:
 
 ### 1. `plot_decay_synt`
 
-The generated data frame "df_mean_minimal" could be used to plot 
-changes in RNA decay rates (log fold, x-axis) versus the
-changes in RNA synthesis rates (log fold, y-axis) in the condition 1 versus 
-condition 2. The black lines horizontal, vertical and diagonal are the median 
-of synthesis_rate, decay_rate and mRNA at time 0 respectively. Dashed gray lines
-indicate 0.5-fold changes from 0 (gray lines) referring to unchanged fold.
+The generated data frame `df_mean_minimal` could be used to plot changes in RNA
+decay rates (log fold, x-axis) versus the changes in RNA synthesis rates (log fold, y-axis) in the condition 1 versus condition 2. The black lines horizontal, vertical and diagonal are the median of synthesis_rate, decay_rate and mRNA at time 0 respectively. Dashed gray lines indicate 0.5-fold changes from 0 (gray lines) referring to unchanged fold.
 Coloration could be adjusted upon the parameter selected. In this case decay rate 
-above .5 and synthesis rate below -.5 are highlighted in yellow.
-Segments could be labeled using geom_text_repel function, they are commented on
+above 0.5 and synthesis rate below -0.5 are highlighted in yellow.
+Segments could be labeled using `geom_text_repel` function, they are commented on
 the function.
 
 <br/><br/>
@@ -432,7 +429,7 @@ knitr::include_graphics("heatscatter_Decay_rate_vs_Synthesis_rate.png")
 
 ### 3. `plot_density`
 
-The function uses the "data_combined_minimal" to plot the probe/bin half-life 
+The function uses the `data_combined_minimal` to plot the probe/bin half-life 
 density in both conditions. Condition 1 and 2 could be indicated.
 
 <br/><br/>
@@ -443,7 +440,7 @@ knitr::include_graphics("density_HL.png")
 
 ### 4. `plot_histogram`
 
-The function uses "df_comb_minimal" to plot a histogram of probe/bin half-life 
+The function uses `df_comb_minimal` to plot a histogram of probe/bin half-life 
 categories from 2 to 20 minutes in both conditions. Condition 1 and 2 could be
 indicated.
 
