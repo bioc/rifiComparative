@@ -1,5 +1,5 @@
 Package: rifiComparative
-Title: 'rifiComparative' compares the output of rifi from 2 different conditions. 
+Title: 'rifiComparative' compares the output of rifi from two different conditions. 
 Version: 1.1.1
 Authors@R: c(person("Loubna", "Youssar",
       email = "lyoussar@gmail.com",
