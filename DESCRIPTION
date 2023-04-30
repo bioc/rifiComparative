@@ -9,7 +9,7 @@ Authors@R: c(person("Loubna", "Youssar",
       role = "aut", "cre"))
 Description: 'rifiComparative' is a continuation of rifi package. It compares two conditions output of rifi using half-life and mRNA at time 0 segments. As an input for the segmentation, the difference between half-life of both condtions and log2FC of the mRNA at time 0 are used. The package provides segmentation, statistics, summary table, fragments visualization and some additional useful plots for further anaylsis. 
 Depends:
-	R (>= 4.1)
+	R (>= 4.2)
 Imports:
 	cowplot,
 	doMC,
